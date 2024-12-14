@@ -1,0 +1,26 @@
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+article {
+  border: 1px solid var(--colour-outline-variant);
+  border-radius: var(--shape-medium);
+  font: var(--body-large);
+  margin-bottom: 8px;
+  padding: 16px;
+}
+
+.day {
+  position: relative;
+}
+
+.day__title {
+  font: var(--label-large);
+  margin: 0;
+}
+
+.day__month {
+  color: var(--colour-on-surface-variant);
+}

@@ -1,2 +1,2 @@
 <?php
-return [];
+return ["app" => ["entrypoint" => true, "path" => "./assets/app.js"]];

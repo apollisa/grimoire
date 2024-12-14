@@ -1,7 +1,7 @@
 controllers:
   resource:
-    namespace: App\Controller
-    path: ../src/Controller/
+    namespace: App\Presentation
+    path: ../src/Presentation/
   type: attribute
 manifest:
   controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController

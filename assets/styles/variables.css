@@ -1,0 +1,36 @@
+:root {
+  --typeface-brand: ui-rounded, "Hiragino Maru Gothic ProN", Quicksand,
+    Comfortaa, Manjari, "Arial Rounded MT", "Arial Rounded MT Bold", Calibri,
+    source-sans-pro, sans-serif;
+  --typeface-plain: system-ui, sans-serif;
+
+  --headline-large: 400 2rem / 2.5rem var(--typeface-brand);
+  --title-large: 400 1.375rem / 1.75rem var(--typeface-brand);
+  --title-medium: 500 1rem / 1.5rem var(--typeface-plain);
+  --title-small: 500 0.875rem / 1.25rem var(--typeface-plain);
+  --body-large: 400 1rem / 1.5rem var(--typeface-plain);
+  --body-medium: 400 0.875rem / 1.25rem var(--typeface-plain);
+  --label-large: 500 0.875rem / 1.25rem var(--typeface-plain);
+  --label-medium: 500 0.75rem / 1rem var(--typeface-plain);
+
+  --colour-surface: oklch(98.37% 0.0107 339.33);
+  --colour-on-surface: oklch(22.45% 0.0113 319.46);
+  --colour-on-surface-variant: oklch(39.69% 0.0175 318.68);
+  --colour-outline-variant: oklch(82.94% 0.0194 325.75);
+
+  --shape-extra-small: 4px;
+  --shape-medium: 12px;
+  --shape-extra-large: 28px;
+
+  ---elevation-1: 0 1px 2px 0 rgb(0 0 0 / 30%), 0 1px 3px 1px rgb(0 0 0 / 15%);
+  ---elevation-2: 0 1px 2px 0 rgb(0 0 0 / 30%), 0 2px 6px 2px rgb(0 0 0 / 15%);
+  ---elevation-3: 0 1px 3px 0 rgb(0 0 0 / 30%), 0 4px 8px 3px rgb(0 0 0 / 15%);
+
+  --duration-short-3: 150ms;
+  --duration-short-4: 200ms;
+  --duration-long-2: 500ms;
+
+  --transition-standard: cubic-bezier(0.2, 0, 0, 1);
+
+  --navbar-height: 80px;
+}

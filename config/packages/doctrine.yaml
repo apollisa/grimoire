@@ -1,0 +1,45 @@
+doctrine:
+  dbal:
+    driver: sqlite3
+    path: "%kernel.project_dir%/var/data.db"
+    profiling_collect_backtrace: "%kernel.debug%"
+    use_savepoints: true
+  orm:
+    auto_generate_proxy_classes: true
+    auto_mapping: true
+    controller_resolver:
+      auto_mapping: false
+    enable_lazy_ghost_objects: true
+    identity_generation_preferences:
+      Doctrine\DBAL\Platforms\PostgreSQLPlatform: identity
+    mappings:
+      App:
+        dir: "%kernel.project_dir%/src/Domain"
+        is_bundle: false
+        prefix: 'App\Domain'
+        type: attribute
+    naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
+    report_fields_where_declared: true
+    validate_xml_mapping: true
+when@test:
+  doctrine:
+    dbal:
+      path: "%kernel.project_dir%/var/test.db"
+when@prod:
+  doctrine:
+    orm:
+      auto_generate_proxy_classes: false
+      proxy_dir: "%kernel.build_dir%/doctrine/orm/Proxies"
+      query_cache_driver:
+        pool: doctrine.system_cache_pool
+        type: pool
+      result_cache_driver:
+        pool: doctrine.result_cache_pool
+        type: pool
+  framework:
+    cache:
+      pools:
+        doctrine.result_cache_pool:
+          adapter: cache.app
+        doctrine.system_cache_pool:
+          adapter: cache.system

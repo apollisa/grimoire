@@ -1,5 +1,6 @@
 framework:
   asset_mapper:
+    importmap_polyfill: false
     missing_import_mode: strict
     paths:
       - assets/

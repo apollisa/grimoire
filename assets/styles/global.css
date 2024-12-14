@@ -1,0 +1,33 @@
+html {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background-color: var(--colour-surface);
+  color: var(--colour-on-surface);
+  margin: 0;
+}
+
+h1 {
+  font: var(--headline-large);
+  margin: 16px;
+}
+
+header {
+  align-items: center;
+  display: flex;
+  gap: 4px;
+  height: 64px;
+  padding: 0 4px;
+
+  h1 {
+    font: var(--title-large);
+    margin: 0;
+  }
+}
+
+main {
+  --margin: 16px;
+  margin: 0 var(--margin) calc(var(--navbar-height) + var(--margin));
+}

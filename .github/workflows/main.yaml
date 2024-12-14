@@ -33,7 +33,15 @@ jobs:
       - name: Lint container
         run: php bin/console --env=prod lint:container
       - name: Lint templates
-        run: php bin/console --env=prod lint:twig
+        run: php bin/console --env=prod lint:twig templates
+      - name: Lint Doctrine mappings
+        run: php bin/console doctrine:schema:validate --skip-sync
+      - name: Create database
+        run: sqlite3 var/test.db .databases
+      - name: Run migrations
+        run: php bin/console --env=test -n doctrine:migrations:migrate
+      - name: Load fixtures
+        run: php bin/console --env=test -n doctrine:fixtures:load
       - name: Run tests
         run: php bin/phpunit
   build:
@@ -54,7 +62,7 @@ jobs:
       - name: Install Composer dependencies
         run: composer install --classmap-authoritative --no-ansi --no-dev --no-interaction --no-scripts --no-progress --prefer-dist --quiet
       - name: Compile assets
-        run: php bin/console asset-map:compile
+        run: php bin/console --env=prod asset-map:compile
       - name: Cleanup
         run: |
           rm -rf .git .github .gitignore
