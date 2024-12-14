@@ -3,3 +3,13 @@ controllers:
     namespace: App\Controller
     path: ../src/Controller/
   type: attribute
+manifest:
+  controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController
+  defaults:
+    headers:
+      Content-Type: application/manifest+json
+    maxAge: 604_800
+    template: manifest.json.twig
+  methods: GET
+  path: /manifest.webmanifest
+  stateless: true

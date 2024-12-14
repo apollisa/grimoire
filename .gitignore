@@ -9,3 +9,8 @@
 ###< symfony/framework-bundle ###
 
 /node_modules/
+
+###> symfony/asset-mapper ###
+/assets/vendor/
+/public/assets/
+###< symfony/asset-mapper ###

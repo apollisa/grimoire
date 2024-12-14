@@ -50,18 +50,23 @@
     "ext-intl": "*",
     "ext-mbstring": "*",
     "ext-xml": "*",
+    "symfony/asset": "7.2.*",
+    "symfony/asset-mapper": "7.2.*",
     "symfony/console": "7.2.*",
     "symfony/dotenv": "7.2.*",
     "symfony/flex": "^2",
     "symfony/framework-bundle": "7.2.*",
     "symfony/runtime": "7.2.*",
-    "symfony/yaml": "7.2.*"
+    "symfony/twig-bundle": "7.2.*",
+    "symfony/yaml": "7.2.*",
+    "twig/extra-bundle": "^3.0",
+    "twig/twig": "^3.0"
   },
-  "require-dev": {},
   "scripts": {
     "auto-scripts": {
       "assets:install %PUBLIC_DIR%": "symfony-cmd",
-      "cache:clear": "symfony-cmd"
+      "cache:clear": "symfony-cmd",
+      "importmap:install": "symfony-cmd"
     },
     "post-install-cmd": [
       "@auto-scripts"

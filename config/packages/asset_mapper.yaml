@@ -1,0 +1,9 @@
+framework:
+  asset_mapper:
+    missing_import_mode: strict
+    paths:
+      - assets/
+when@prod:
+  framework:
+    asset_mapper:
+      missing_import_mode: warn
