@@ -34,6 +34,8 @@ jobs:
         run: php bin/console --env=prod lint:container
       - name: Lint templates
         run: php bin/console --env=prod lint:twig
+      - name: Run tests
+        run: php bin/phpunit
   build:
     runs-on: ubuntu-latest
     needs: test
@@ -58,7 +60,8 @@ jobs:
           rm -rf .git .github .gitignore
           rm -rf package.json package-lock.json
           rm -rf var
-          rm -rf tests
+          rm -rf .env.dev
+          rm -rf bin/phpunit .env.test phpunit.xml.dist tests
           rm -rf .prettierrc
           rm -rf assets
       - name: Upload build
