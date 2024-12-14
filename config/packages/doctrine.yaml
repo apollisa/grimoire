@@ -4,6 +4,7 @@ doctrine:
     path: "%kernel.project_dir%/var/data.db"
     profiling_collect_backtrace: "%kernel.debug%"
     types:
+      meal_id: App\Infrastructure\Menu\MealIdType
       recipe_id: App\Infrastructure\Recipe\RecipeIdType
     use_savepoints: true
   orm:

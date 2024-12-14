@@ -19,6 +19,11 @@ class MenuDoctrineRepository extends ServiceEntityRepository implements
         parent::__construct($registry, Menu::class);
     }
 
+    public function last(): ?Menu
+    {
+        return $this->findOneBy([], ["id" => "DESC"]);
+    }
+
     public function upcoming(): iterable
     {
         return $this->getEntityManager()
@@ -27,5 +32,10 @@ class MenuDoctrineRepository extends ServiceEntityRepository implements
             )
             ->setParameter("date", $this->clock->now(), Types::DATE_IMMUTABLE)
             ->getResult();
+    }
+
+    public function add(Menu $menu): void
+    {
+        $this->getEntityManager()->persist($menu);
     }
 }

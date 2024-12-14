@@ -41,6 +41,11 @@ class Day
         return $this->date;
     }
 
+    public function dayOfWeek(): DayOfWeek
+    {
+        return DayOfWeek::of($this->date());
+    }
+
     /**
      * @return iterable<Meal>
      */
@@ -49,8 +54,17 @@ class Day
         return $this->meals;
     }
 
-    public function planMeal(Recipe $recipe): void
+    public function planMeal(Recipe|Remains $meal): void
     {
-        $this->meals->add(new Meal($this, $recipe));
+        $this->meals->add(
+            $meal instanceof Recipe
+                ? Meal::fromRecipe($meal, $this)
+                : $meal->toMeal($this),
+        );
+    }
+
+    public function equals(self $other): bool
+    {
+        return $this->id === $other->id;
     }
 }

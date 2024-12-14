@@ -4,6 +4,7 @@ namespace App\Domain\Recipe;
 
 use App\Infrastructure\Recipe\RecipeIdType;
 use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Embedded;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
@@ -17,9 +18,13 @@ class Recipe
     #[Column]
     private string $name;
 
-    public function __construct(string $name)
+    #[Embedded(columnPrefix: false)]
+    private Servings $servings;
+
+    public function __construct(string $name, Servings $servings)
     {
         $this->name = $name;
+        $this->servings = $servings;
     }
 
     public function id(): RecipeId
@@ -30,5 +35,15 @@ class Recipe
     public function name(): string
     {
         return $this->name;
+    }
+
+    public function servings(): Servings
+    {
+        return $this->servings;
+    }
+
+    public function equals(self $other): bool
+    {
+        return $this->id === $other->id;
     }
 }

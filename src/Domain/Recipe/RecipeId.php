@@ -2,21 +2,8 @@
 
 namespace App\Domain\Recipe;
 
-use Stringable;
+use App\Domain\Shared\Id;
 
-readonly class RecipeId implements Stringable
+readonly class RecipeId extends Id
 {
-    public function __construct(private int $value)
-    {
-    }
-
-    public function value(): int
-    {
-        return $this->value;
-    }
-
-    public function __toString(): string
-    {
-        return $this->value();
-    }
 }

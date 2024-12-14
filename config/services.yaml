@@ -6,11 +6,15 @@ services:
     autowire: true
   App\:
     exclude:
+      - "../src/Domain/Menu/MenuRemains.php"
       - "../src/Kernel.php"
     resource: "../src/"
   Symfony\Component\Dotenv\Command\DotenvDumpCommand: ~
 when@test:
   services:
+    App\Infrastructure\Shared\SensibleSQLiteMiddleware:
+      tags:
+        - { name: doctrine.middleware, priority: 150 }
     App\Tests\Fixtures\:
       autoconfigure: true
       autowire: true

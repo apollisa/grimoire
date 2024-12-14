@@ -6,6 +6,7 @@ use App\Domain\Recipe\Recipe;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ReadableCollection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
@@ -24,25 +25,77 @@ class Menu
     #[OrderBy(["date" => "ASC"]), OneToMany(Day::class, "menu", ["PERSIST"])]
     private Collection $days;
 
-    public function __construct(DateTimeInterface $monday)
+    /**
+     * @var Remains[]
+     */
+    private array $remains;
+
+    /**
+     * @param Remains[] $remains
+     */
+    public function __construct(DateTimeInterface $monday, array $remains = [])
     {
         $this->days = new ArrayCollection();
         $date = DatePoint::createFromInterface($monday);
-        for ($day = 0; $day < 7; $day++) {
-            $this->days->add(new Day($this, $date->modify("+$day day")));
+        foreach (DayOfWeek::cases() as $day) {
+            $this->days->add(new Day($this, $day->adjustInto($date)));
         }
+        $this->remains = $remains;
+    }
+
+    public function monday(): DateTimeInterface
+    {
+        return $this->days()->first()->date();
     }
 
     /**
-     * @return iterable<Day>
+     * @return ReadableCollection<int, Day>
      */
-    public function days(): iterable
+    public function days(): ReadableCollection
     {
         return $this->days;
     }
 
-    public function planMeal(DayOfWeek $day, Recipe $recipe): void
+    public function planMeal(DayOfWeek $day, Recipe|Remains $meal): void
     {
-        $this->days->get($day->getValue() - 1)->planMeal($recipe);
+        $this->days()
+            ->findFirst(
+                fn(int $_, Day $value): bool => $value->dayOfWeek() === $day,
+            )
+            ?->planMeal($meal);
+    }
+
+    /**
+     * @return Remains[]
+     */
+    public function remains(DayOfWeek $before = DayOfWeek::SUNDAY): array
+    {
+        $remains = [];
+        foreach ($this->days() as $day) {
+            if ($day->dayOfWeek()->value <= $before->value) {
+                foreach ($day->meals() as $meal) {
+                    if ($meal->hasRemains()) {
+                        $remains[] = $meal;
+                    }
+                }
+            }
+        }
+        return $remains;
+    }
+
+    public function takeRemains(DayOfWeek $day): ?Remains
+    {
+        $remains = array_shift($this->remains);
+        if ($remains) {
+            return $remains;
+        } else {
+            $remains = $this->remains($day);
+            return count($remains) === 0 ? null : reset($remains);
+        }
+    }
+
+    public function equals(self $other): bool
+    {
+        return $this->id === $other->id;
     }
 }

@@ -22,7 +22,7 @@
         </h2>
         {% for meal in day.meals %}
           <p>
-            {% if meal.remains %}
+            {% if meal.isRemains %}
               {{ recipes[meal.recipe].name }} (restes)
             {% else %}
               <span class="recipe">{{ ux_icon('tabler:template') }} {{ recipes[meal.recipe.value].name }}</span>
