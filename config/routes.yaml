@@ -1,0 +1,5 @@
+controllers:
+  resource:
+    namespace: App\Controller
+    path: ../src/Controller/
+  type: attribute
