@@ -8,3 +8,4 @@ services:
     resource: "../src/"
     exclude:
       - "../src/Kernel.php"
+  Symfony\Component\Dotenv\Command\DotenvDumpCommand: ~
