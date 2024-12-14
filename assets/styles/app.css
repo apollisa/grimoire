@@ -18,9 +18,30 @@ article {
 
 .day__title {
   font: var(--label-large);
-  margin: 0;
+  margin: 0 0 12px;
 }
 
 .day__month {
+  color: var(--colour-on-surface-variant);
+}
+
+.icon {
+  height: var(--icon-size);
+  width: var(--icon-size);
+}
+
+.recipe {
+  align-items: center;
+  color: var(--colour-primary);
+  display: flex;
+  gap: 8px;
+  text-decoration: none;
+
+  .icon {
+    --icon-size: 18px;
+  }
+}
+
+.meal--empty {
   color: var(--colour-on-surface-variant);
 }

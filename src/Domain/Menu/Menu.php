@@ -2,6 +2,7 @@
 
 namespace App\Domain\Menu;
 
+use App\Domain\Recipe\Recipe;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -35,8 +36,13 @@ class Menu
     /**
      * @return iterable<Day>
      */
-    public function getDays(): iterable
+    public function days(): iterable
     {
         return $this->days;
+    }
+
+    public function planMeal(DayOfWeek $day, Recipe $recipe): void
+    {
+        $this->days->get($day->getValue() - 1)->planMeal($recipe);
     }
 }

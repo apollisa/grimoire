@@ -20,6 +20,17 @@
           {{ day.date|format_date(pattern='EEEE')|capitalize }}
           <span class="day__month">{{ day.date|format_date(pattern='d MMM') }}</span>
         </h2>
+        {% for meal in day.meals %}
+          <p>
+            {% if meal.remains %}
+              {{ recipes[meal.recipe].name }} (restes)
+            {% else %}
+              <span class="recipe">{{ ux_icon('tabler:template') }} {{ recipes[meal.recipe.value].name }}</span>
+            {% endif %}
+          </p>
+        {% else %}
+          <p class="meal--empty">Aucun repas</p>
+        {% endfor %}
       </article>
     {% endfor %}
   {% endfor %}

@@ -3,6 +3,8 @@ doctrine:
     driver: sqlite3
     path: "%kernel.project_dir%/var/data.db"
     profiling_collect_backtrace: "%kernel.debug%"
+    types:
+      recipe_id: App\Infrastructure\Recipe\RecipeIdType
     use_savepoints: true
   orm:
     auto_generate_proxy_classes: true

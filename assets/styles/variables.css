@@ -13,6 +13,7 @@
   --label-large: 500 0.875rem / 1.25rem var(--typeface-plain);
   --label-medium: 500 0.75rem / 1rem var(--typeface-plain);
 
+  --colour-primary: oklch(49.19% 0.0933 313.85);
   --colour-surface: oklch(98.37% 0.0107 339.33);
   --colour-on-surface: oklch(22.45% 0.0113 319.46);
   --colour-on-surface-variant: oklch(39.69% 0.0175 318.68);
@@ -32,5 +33,6 @@
 
   --transition-standard: cubic-bezier(0.2, 0, 0, 1);
 
+  --icon-size: 24px;
   --navbar-height: 80px;
 }

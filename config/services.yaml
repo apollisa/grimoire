@@ -6,8 +6,6 @@ services:
     autowire: true
   App\:
     exclude:
-      - "../src/Domain/Menu/Day.php"
-      - "../src/Domain/Menu/Menu.php"
       - "../src/Kernel.php"
     resource: "../src/"
   Symfony\Component\Dotenv\Command\DotenvDumpCommand: ~
