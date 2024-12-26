@@ -24,6 +24,13 @@ class RecipeDoctrineRepository extends ServiceEntityRepository implements
 
     public function ofMonth(Month $month): array
     {
-        return $this->findAll();
+        return $this->getEntityManager()
+            ->createQuery(
+                "SELECT r FROM App\Domain\Recipe\Recipe r
+            WHERE :month BETWEEN r.seasonality.starts AND r.seasonality.ends
+               OR r.seasonality.starts > r.seasonality.ends AND (:month >= r.seasonality.starts OR :month <= r.seasonality.ends)",
+            )
+            ->setParameter("month", $month)
+            ->getResult();
     }
 }

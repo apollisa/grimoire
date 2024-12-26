@@ -21,10 +21,17 @@ class Recipe
     #[Embedded(columnPrefix: false)]
     private Servings $servings;
 
-    public function __construct(string $name, Servings $servings)
-    {
+    #[Embedded]
+    private Seasonality $seasonality;
+
+    public function __construct(
+        string $name,
+        Servings $servings,
+        Seasonality $seasonality,
+    ) {
         $this->name = $name;
         $this->servings = $servings;
+        $this->seasonality = $seasonality;
     }
 
     public function id(): RecipeId
