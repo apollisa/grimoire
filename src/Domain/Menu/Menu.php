@@ -28,7 +28,7 @@ class Menu
     /**
      * @var Remains[]
      */
-    private array $remains;
+    private array $remains = [];
 
     /**
      * @param Remains[] $remains
@@ -58,11 +58,19 @@ class Menu
 
     public function planMeal(DayOfWeek $day, Recipe|Remains $meal): void
     {
-        $this->days()
-            ->findFirst(
-                fn(int $_, Day $value): bool => $value->dayOfWeek() === $day,
-            )
-            ?->planMeal($meal);
+        $this->day($day)->planMeal($meal);
+    }
+
+    public function day(DayOfWeek $day): Day
+    {
+        return $this->days()->findFirst(
+            fn(int $_, Day $value): bool => $value->dayOfWeek() === $day,
+        );
+    }
+
+    public function clear(DayOfWeek $day): void
+    {
+        $this->day($day)->clear();
     }
 
     /**

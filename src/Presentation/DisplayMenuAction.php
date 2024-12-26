@@ -8,7 +8,7 @@ use Symfony\Bridge\Twig\Attribute\Template;
 use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[AsController, Route(methods: "GET")]
+#[AsController, Route(name: "menu_display", methods: "GET")]
 class DisplayMenuAction
 {
     public function __construct(

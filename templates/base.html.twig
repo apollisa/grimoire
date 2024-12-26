@@ -23,7 +23,7 @@
         {% for meal in day.meals %}
           <p>
             {% if meal.isRemains %}
-              {{ recipes[meal.recipe].name }} (restes)
+              {{ recipes[meal.recipe.value].name }} (restes)
             {% else %}
               <span class="recipe">{{ ux_icon('tabler:template') }} {{ recipes[meal.recipe.value].name }}</span>
             {% endif %}
@@ -34,6 +34,9 @@
       </article>
     {% endfor %}
   {% endfor %}
+  <form action="{{ path('menu_regenerate') }}" class="fab" method="post">
+    <button aria-label="Regénérer" class="button button--fab state">{{ ux_icon('tabler:wand') }}</button>
+  </form>
 </main>
 </body>
 </html>

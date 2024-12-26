@@ -1,0 +1,106 @@
+.button {
+  background: none;
+  border: 0;
+  box-sizing: border-box;
+  font: var(--label-large);
+
+  & > * {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+.state {
+  overflow: hidden;
+  position: relative;
+
+  &::before {
+    background-color: var(--colour-on-surface);
+    bottom: 0;
+    content: "";
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: opacity var(--duration-short-4) var(--transition-standard);
+  }
+
+  &:hover::before {
+    opacity: 0.08;
+  }
+
+  &:focus::before,
+  &:active::before {
+    opacity: 0.1;
+  }
+
+  &:disabled {
+    opacity: 0.38;
+
+    &::before {
+      content: none;
+    }
+  }
+}
+
+.button--icon {
+  color: var(--colour-on-surface-variant);
+  height: 48px;
+  padding: 12px;
+  width: 48px;
+
+  &:disabled {
+    color: var(--colour-on-surface);
+  }
+
+  &::before {
+    border-radius: 50%;
+    bottom: 4px;
+    left: 4px;
+    right: 4px;
+    top: 4px;
+  }
+}
+
+.button--text {
+  --height: 40px;
+  border-radius: calc(var(--height) / 2);
+  color: var(--colour-primary);
+  height: var(--height);
+  padding: 0 12px;
+}
+
+@keyframes fab {
+  from {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+
+  20% {
+    opacity: 1;
+  }
+}
+
+.fab {
+  animation: var(--duration-long-2) var(--transition-standard) fab;
+  bottom: calc(var(--navbar-height) + 16px);
+  position: fixed;
+  right: 16px;
+  z-index: 2;
+}
+
+.button--fab {
+  background-color: var(--colour-tertiary-container);
+  border-radius: var(--shape-medium);
+  box-shadow: var(---elevation-1);
+  color: var(--colour-on-tertiary-container);
+  height: 56px;
+  overflow: hidden;
+  padding: 16px;
+  width: 56px;
+
+  &::before {
+    background-color: var(--colour-on-tertiary-container);
+  }
+}

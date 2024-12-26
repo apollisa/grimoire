@@ -26,7 +26,7 @@ class Day
     #[Column(type: Types::DATE_IMMUTABLE)]
     private DateTimeInterface $date;
 
-    #[OneToMany(Meal::class, "day", ["PERSIST"])]
+    #[OneToMany(Meal::class, "day", ["PERSIST"], orphanRemoval: true)]
     private Collection $meals;
 
     public function __construct(Menu $menu, DateTimeInterface $date)
@@ -61,6 +61,11 @@ class Day
                 ? Meal::fromRecipe($meal, $this)
                 : $meal->toMeal($this),
         );
+    }
+
+    public function clear(): void
+    {
+        $this->meals->clear();
     }
 
     public function equals(self $other): bool
