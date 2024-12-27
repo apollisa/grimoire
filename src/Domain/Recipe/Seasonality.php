@@ -14,8 +14,8 @@ readonly class Seasonality
     }
 
     public function __construct(
-        #[Column(enumType: Month::class)] private Month $starts,
-        #[Column(enumType: Month::class)] private Month $ends,
+        #[Column] private Month $starts,
+        #[Column] private Month $ends,
     ) {
     }
 }

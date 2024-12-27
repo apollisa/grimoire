@@ -1,2 +1,19 @@
 {% extends 'base.html.twig' %}
 {% block title recipe.name %}
+{% block content %}
+  <h2 class="recipe__section">Ingrédients</h2>
+  <ul class="ingredients">
+    {% for ingredient in recipe.ingredients %}
+      <li>
+        {% set quantity = ingredient.quantity %}
+        {% if quantity %}
+          <span class="quantity">
+            {{ quantity.value|format_number }} {{ units[quantity.unit.value] ?? quantity.unit.value }}
+          </span> {{ ingredient.name }}
+        {% else %}
+          {{ ingredient.name|capitalize }}
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

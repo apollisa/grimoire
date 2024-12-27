@@ -31,7 +31,7 @@ class RecipePickerTest extends KernelTestCase
     private function addRecipe(Seasonality $seasonality): void
     {
         $this->manager->persist(
-            new Recipe("Carbonara", new Servings(2), $seasonality),
+            new Recipe("Carbonara", new Servings(2), $seasonality, []),
         );
     }
 

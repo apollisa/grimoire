@@ -108,3 +108,9 @@ p {
     position: relative;
   }
 }
+
+li {
+  font: var(--body-large);
+  --list-x-padding: 16px;
+  padding: 8px var(--list-x-padding);
+}

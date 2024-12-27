@@ -4,6 +4,7 @@ doctrine:
     path: "%kernel.project_dir%/var/data.db"
     profiling_collect_backtrace: "%kernel.debug%"
     types:
+      ingredients: App\Infrastructure\Recipe\IngredientsType
       meal_id: App\Infrastructure\Menu\MealIdType
       menu_id: App\Infrastructure\Menu\MenuIdType
       recipe_id: App\Infrastructure\Recipe\RecipeIdType

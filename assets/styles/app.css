@@ -79,3 +79,16 @@ article {
     flex-shrink: 0;
   }
 }
+
+.recipe__section {
+  font: var(--title-large);
+  margin: 0 0 8px;
+}
+
+.ingredients {
+  margin-bottom: 16px;
+}
+
+.quantity {
+  color: var(--colour-primary);
+}

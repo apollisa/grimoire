@@ -11,7 +11,7 @@ class TestRecipe extends Recipe
 {
     public function __construct(string $name, Servings $servings)
     {
-        parent::__construct($name, $servings, Seasonality::year());
+        parent::__construct($name, $servings, Seasonality::year(), []);
     }
 
     public function id(): RecipeId

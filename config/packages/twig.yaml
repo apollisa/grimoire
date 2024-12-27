@@ -2,6 +2,10 @@ twig:
   file_name_pattern: "*.twig"
   globals:
     csp: '@App\Infrastructure\Shared\ContentSecurityPolicyGenerator'
+    units:
+      pinch: pincée
+      tbsp.: c.-à-s.
+      tsp.: c.-à-c.
 when@test:
   twig:
     strict_variables: true
