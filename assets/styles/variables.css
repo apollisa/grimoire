@@ -14,6 +14,7 @@
   --label-medium: 500 0.75rem / 1rem var(--typeface-plain);
 
   --colour-primary: oklch(49.19% 0.0933 313.85);
+  --colour-on-primary: oklch(100% 0 0);
   --colour-secondary-container: oklch(91.77% 0.0386 320.6);
   --colour-on-secondary-container: oklch(22.8% 0.0364 315.67);
   --colour-tertiary-container: oklch(91.9% 0.0414 19.77);

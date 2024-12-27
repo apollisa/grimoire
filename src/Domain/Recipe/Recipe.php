@@ -4,6 +4,7 @@ namespace App\Domain\Recipe;
 
 use App\Infrastructure\Recipe\IngredientsType;
 use App\Infrastructure\Recipe\RecipeIdType;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Embedded;
 use Doctrine\ORM\Mapping\Entity;
@@ -28,19 +29,25 @@ class Recipe
     #[Column(type: IngredientsType::NAME)]
     private array $ingredients;
 
+    #[Column(type: Types::JSON)]
+    private readonly array $instructions;
+
     /**
      * @param iterable<Ingredient> $ingredients
+     * @param iterable<string> $instructions
      */
     public function __construct(
         string $name,
         Servings $servings,
         Seasonality $seasonality,
         array $ingredients,
+        array $instructions,
     ) {
         $this->name = $name;
         $this->servings = $servings;
         $this->seasonality = $seasonality;
         $this->ingredients = $ingredients;
+        $this->instructions = $instructions;
     }
 
     public function id(): RecipeId
@@ -64,6 +71,14 @@ class Recipe
     public function ingredients(): iterable
     {
         return $this->ingredients;
+    }
+
+    /**
+     * @return iterable<string>
+     */
+    public function instructions(): iterable
+    {
+        return $this->instructions;
     }
 
     public function equals(self $other): bool

@@ -16,4 +16,10 @@
       </li>
     {% endfor %}
   </ul>
+  <h2 class="recipe__section">Instructions</h2>
+  <ol class="instructions">
+    {% for instruction in recipe.instructions %}
+      <li class="instructions__item">{{ instruction }}</li>
+    {% endfor %}
+  </ol>
 {% endblock %}

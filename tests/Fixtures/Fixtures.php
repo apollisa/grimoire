@@ -23,6 +23,7 @@ class Fixtures extends Fixture
             new Servings(4),
             Seasonality::year(),
             [new Ingredient(new Quantity(1, Unit::KILOGRAMS), "patates")],
+            ["Préparer une purée"],
         );
         $manager->persist($recipe);
         $manager->flush();

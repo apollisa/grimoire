@@ -92,3 +92,32 @@ article {
 .quantity {
   color: var(--colour-primary);
 }
+
+.instructions {
+  counter-reset: instruction-counter;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  .instructions__item {
+    counter-increment: instruction-counter;
+    --counter-size: 24px;
+    padding-left: calc(var(--list-x-padding) + var(--counter-size) + 16px);
+    position: relative;
+
+    &::before {
+      align-items: center;
+      background-color: var(--colour-primary);
+      border-radius: 50%;
+      color: var(--colour-on-primary);
+      content: counter(instruction-counter);
+      display: inline-flex;
+      font: var(--label-large);
+      height: var(--counter-size);
+      justify-content: center;
+      left: var(--list-x-padding);
+      position: absolute;
+      width: var(--counter-size);
+    }
+  }
+}

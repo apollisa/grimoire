@@ -20,4 +20,9 @@ class DisplayRecipeActionTest extends WebTestCase
     {
         self::assertSelectorTextContains("li", "1 kg patates");
     }
+
+    public function testDisplayRecipeInstructions(): void
+    {
+        self::assertSelectorTextContains("ol li", "Préparer une purée");
+    }
 }
