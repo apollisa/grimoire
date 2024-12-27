@@ -4,6 +4,7 @@ namespace App\Domain\Menu;
 
 interface MenuRepository
 {
+    public function ofId(MenuId $id): Menu;
     public function last(): ?Menu;
 
     /**

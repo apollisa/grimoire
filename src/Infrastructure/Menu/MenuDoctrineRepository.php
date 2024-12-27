@@ -3,6 +3,7 @@
 namespace App\Infrastructure\Menu;
 
 use App\Domain\Menu\Menu;
+use App\Domain\Menu\MenuId;
 use App\Domain\Menu\MenuRepository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\Types\Types;
@@ -17,6 +18,11 @@ class MenuDoctrineRepository extends ServiceEntityRepository implements
         private readonly ClockInterface $clock,
     ) {
         parent::__construct($registry, Menu::class);
+    }
+
+    public function ofId(MenuId $id): Menu
+    {
+        return $this->find($id);
     }
 
     public function last(): ?Menu

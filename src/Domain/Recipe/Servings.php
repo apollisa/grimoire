@@ -24,6 +24,11 @@ readonly class Servings
         return $this->value > $other->value;
     }
 
+    public function plus(self $other): self
+    {
+        return new self($this->value + $other->value);
+    }
+
     public function minus(self $other): self
     {
         return new self($this->value - $other->value);

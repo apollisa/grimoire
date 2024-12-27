@@ -5,6 +5,7 @@ doctrine:
     profiling_collect_backtrace: "%kernel.debug%"
     types:
       meal_id: App\Infrastructure\Menu\MealIdType
+      menu_id: App\Infrastructure\Menu\MenuIdType
       recipe_id: App\Infrastructure\Recipe\RecipeIdType
     use_savepoints: true
   orm:

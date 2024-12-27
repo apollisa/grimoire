@@ -14,12 +14,21 @@
 <h1>Menu</h1>
 <main>
   {% for menu in menus %}
-    {% for index, day in menu.days %}
+    {% for day in menu.days %}
       <article class="day">
         <h2 class="day__title">
           {{ day.date|format_date(pattern='EEEE')|capitalize }}
           <span class="day__month">{{ day.date|format_date(pattern='d MMM') }}</span>
         </h2>
+        <div class="day__actions">
+          <form action="{{ path('day_clear', {id: menu.id, day: day.dayOfWeek.value}) }}" method="post">
+            <button
+              aria-label="Retirer"
+              class="button button--icon state"
+              {% if day.meals is empty %}disabled{% endif %}
+            >{{ ux_icon('tabler:circle-minus') }}</button>
+          </form>
+        </div>
         {% for meal in day.meals %}
           <p>
             {% if meal.isRemains %}

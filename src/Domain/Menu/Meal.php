@@ -35,22 +35,23 @@ class Meal implements Remains
 
     public static function fromRecipe(Recipe $recipe, Day $day): self
     {
-        $remains = $recipe->servings()->minus(new Servings(2));
-        return new self($day, $recipe->id(), $remains);
+        $meal = new self($day, $recipe->id());
+        $meal->remains = $recipe->servings()->minus($meal->servings());
+        return $meal;
     }
 
     public static function fromRemains(Remains $remains, Day $day): self
     {
-        $meal = new self($day, $remains->recipe(), Servings::zero());
+        $meal = new self($day, $remains->recipe());
         $meal->remainsOf = $remains->meal();
         return $meal;
     }
 
-    private function __construct(Day $day, ?RecipeId $recipe, Servings $remains)
+    private function __construct(Day $day, ?RecipeId $recipe)
     {
         $this->day = $day;
         $this->recipe = $recipe;
-        $this->remains = $remains;
+        $this->remains = Servings::zero();
     }
 
     public function id(): MealId
@@ -68,20 +69,36 @@ class Meal implements Remains
         return $this->recipe;
     }
 
+    public function servings(): Servings
+    {
+        return new Servings(2);
+    }
+
     public function hasRemains(): bool
     {
         return $this->remains->isMoreThan(Servings::zero());
     }
 
+    public function putBack(Servings $servings): void
+    {
+        $this->remains = $this->remains->plus($servings);
+    }
+
     public function toMeal(Day $day): Meal
     {
-        $this->remains = $this->remains->minus(new Servings(2));
-        return self::fromRemains($this, $day);
+        $meal = self::fromRemains($this, $day);
+        $this->remains = $this->remains->minus($meal->servings());
+        return $meal;
     }
 
     public function isRemains(): bool
     {
         return $this->remainsOf !== null;
+    }
+
+    public function isRemainsOf(Meal $meal): bool
+    {
+        return $this->remainsOf?->equals($meal);
     }
 
     public function equals(self $other): bool

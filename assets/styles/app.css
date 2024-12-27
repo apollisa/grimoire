@@ -25,6 +25,13 @@ article {
   color: var(--colour-on-surface-variant);
 }
 
+.day__actions {
+  display: flex;
+  position: absolute;
+  right: 4px;
+  top: 4px;
+}
+
 .icon {
   height: var(--icon-size);
   width: var(--icon-size);

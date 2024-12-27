@@ -3,11 +3,11 @@
 namespace App\Domain\Menu;
 
 use App\Domain\Recipe\Recipe;
+use App\Infrastructure\Menu\MenuIdType;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ReadableCollection;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
@@ -19,8 +19,8 @@ use Symfony\Component\Clock\DatePoint;
 #[Entity]
 class Menu
 {
-    #[Id, GeneratedValue, Column(type: Types::INTEGER)]
-    private ?int $id = null;
+    #[Id, GeneratedValue, Column(type: MenuIdType::NAME)]
+    private ?MenuId $id = null;
 
     #[OrderBy(["date" => "ASC"]), OneToMany(Day::class, "menu", ["PERSIST"])]
     private Collection $days;
@@ -41,6 +41,11 @@ class Menu
             $this->days->add(new Day($this, $day->adjustInto($date)));
         }
         $this->remains = $remains;
+    }
+
+    public function id(): MenuId
+    {
+        return $this->id;
     }
 
     public function monday(): DateTimeInterface
@@ -70,7 +75,24 @@ class Menu
 
     public function clear(DayOfWeek $day): void
     {
+        foreach ($this->day($day)->meals() as $meal) {
+            if ($meal->isRemains()) {
+                $this->putBack($meal);
+            }
+        }
         $this->day($day)->clear();
+    }
+
+    private function putBack(Meal $remains): void
+    {
+        foreach ($this->days() as $day) {
+            foreach ($day->meals() as $meal) {
+                if ($remains->isRemainsOf($meal)) {
+                    $meal->putBack($remains->servings());
+                    return;
+                }
+            }
+        }
     }
 
     /**
