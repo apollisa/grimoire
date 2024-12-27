@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+{% block title 'Toutes vos recettes' %}
+{% block content %}
+  <nav>
+    {% for recipe in recipes %}
+      <a class="list__item state" href="{{ path('recipe_display', {id: recipe.id}) }}">
+        <span>{{ recipe.name }}</span> {{ ux_icon('tabler:chevron-right') }}
+      </a>
+    {% endfor %}
+  </nav>
+{% endblock %}

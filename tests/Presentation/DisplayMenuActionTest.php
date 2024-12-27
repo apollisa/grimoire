@@ -25,4 +25,9 @@ class DisplayMenuActionTest extends WebTestCase
     {
         self::assertSelectorTextContains("p", "Parmentier");
     }
+
+    public function testDisplaysRecipeLink(): void
+    {
+        self::assertSelectorExists("a[href='/recettes/1']");
+    }
 }

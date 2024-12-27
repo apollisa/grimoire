@@ -17,7 +17,7 @@ class DisplayMenuAction
     ) {
     }
 
-    #[Template("base.html.twig")]
+    #[Template("menus/index.html.twig")]
     public function __invoke(): array
     {
         $menus = $this->menuRepository->upcoming();

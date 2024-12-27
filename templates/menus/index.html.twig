@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+{% block title 'Menu' %}
+{% block content %}
+  {% for menu in menus %}
+    {% for day in menu.days %}
+      <article class="day">
+        <h2 class="day__title">
+          {{ day.date|format_date(pattern='EEEE')|capitalize }}
+          <span class="day__month">{{ day.date|format_date(pattern='d MMM') }}</span>
+        </h2>
+        <div class="day__actions">
+          <form action="{{ path('day_clear', {id: menu.id, day: day.dayOfWeek.value}) }}" method="post">
+            <button
+              aria-label="Retirer"
+              class="button button--icon state"
+              {% if day.meals is empty %}disabled{% endif %}
+            >{{ ux_icon('tabler:circle-minus') }}</button>
+          </form>
+        </div>
+        {% for meal in day.meals %}
+          <p>
+            {% if meal.isRemains %}
+              {{ recipes[meal.recipe.value].name }} (restes)
+            {% else %}
+              <a
+                class="recipe"
+                href="{{ path('recipe_display', {id: meal.recipe}) }}"
+              >{{ ux_icon('tabler:template') }} {{ recipes[meal.recipe.value].name }}</a>
+            {% endif %}
+          </p>
+        {% else %}
+          <p class="meal--empty">Aucun repas</p>
+        {% endfor %}
+      </article>
+    {% endfor %}
+  {% endfor %}
+  <form action="{{ path('menu_regenerate') }}" class="fab" method="post">
+    <button aria-label="Regénérer" class="button button--fab state">{{ ux_icon('tabler:wand') }}</button>
+  </form>
+{% endblock %}

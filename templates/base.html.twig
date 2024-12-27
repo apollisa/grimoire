@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Menu · Grimoire</title>
+  <title>{% block title %}{% endblock %} · Grimoire</title>
   <link rel="manifest" href="{{ path('manifest') }}">
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" href="{{ asset('images/icon.svg') }}" type="image/svg+xml">
@@ -11,41 +11,23 @@
   {{ importmap('app', {nonce: csp.nonce}) }}
 </head>
 <body>
-<h1>Menu</h1>
+<h1>{{ block('title') }}</h1>
 <main>
-  {% for menu in menus %}
-    {% for day in menu.days %}
-      <article class="day">
-        <h2 class="day__title">
-          {{ day.date|format_date(pattern='EEEE')|capitalize }}
-          <span class="day__month">{{ day.date|format_date(pattern='d MMM') }}</span>
-        </h2>
-        <div class="day__actions">
-          <form action="{{ path('day_clear', {id: menu.id, day: day.dayOfWeek.value}) }}" method="post">
-            <button
-              aria-label="Retirer"
-              class="button button--icon state"
-              {% if day.meals is empty %}disabled{% endif %}
-            >{{ ux_icon('tabler:circle-minus') }}</button>
-          </form>
-        </div>
-        {% for meal in day.meals %}
-          <p>
-            {% if meal.isRemains %}
-              {{ recipes[meal.recipe.value].name }} (restes)
-            {% else %}
-              <span class="recipe">{{ ux_icon('tabler:template') }} {{ recipes[meal.recipe.value].name }}</span>
-            {% endif %}
-          </p>
-        {% else %}
-          <p class="meal--empty">Aucun repas</p>
-        {% endfor %}
-      </article>
-    {% endfor %}
-  {% endfor %}
-  <form action="{{ path('menu_regenerate') }}" class="fab" method="post">
-    <button aria-label="Regénérer" class="button button--fab state">{{ ux_icon('tabler:wand') }}</button>
-  </form>
+  {% block content %}{% endblock %}
 </main>
+<nav class="navbar">
+  <ul class="nav">
+    {% macro link(route, icon, name) %}
+      <li class="nav__item">
+        <a
+          class="nav__link {% if app.current_route starts with route|split('_')|first %}nav__link--current{% endif %}"
+          href="{{ path(route) }}"
+        >{{ ux_icon(icon) }} {{ name }}</a>
+      </li>
+    {% endmacro %}
+    {{ _self.link('menu_display', 'tabler:calendar-month', 'Menu') }}
+    {{ _self.link('recipe_list', 'tabler:template', 'Recettes') }}
+  </ul>
+</nav>
 </body>
 </html>

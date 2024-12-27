@@ -10,4 +10,9 @@ interface RecipeRepository
      * @return Recipe[]
      */
     public function ofMonth(Month $month): array;
+
+    /**
+     * @return iterable<Recipe>
+     */
+    public function all(): iterable;
 }

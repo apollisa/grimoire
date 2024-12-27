@@ -14,11 +14,14 @@
   --label-medium: 500 0.75rem / 1rem var(--typeface-plain);
 
   --colour-primary: oklch(49.19% 0.0933 313.85);
+  --colour-secondary-container: oklch(91.77% 0.0386 320.6);
+  --colour-on-secondary-container: oklch(22.8% 0.0364 315.67);
   --colour-tertiary-container: oklch(91.9% 0.0414 19.77);
   --colour-on-tertiary-container: oklch(23.23% 0.0552 20.61);
   --colour-surface: oklch(98.37% 0.0107 339.33);
   --colour-on-surface: oklch(22.45% 0.0113 319.46);
   --colour-on-surface-variant: oklch(39.69% 0.0175 318.68);
+  --colour-surface-container: oklch(95.02% 0.015 332.24);
   --colour-outline-variant: oklch(82.94% 0.0194 325.75);
 
   --shape-extra-small: 4px;

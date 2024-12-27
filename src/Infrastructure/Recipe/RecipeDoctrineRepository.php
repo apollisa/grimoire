@@ -33,4 +33,9 @@ class RecipeDoctrineRepository extends ServiceEntityRepository implements
             ->setParameter("month", $month)
             ->getResult();
     }
+
+    public function all(): iterable
+    {
+        return $this->findBy([], ["name" => "ASC"]);
+    }
 }

@@ -52,3 +52,30 @@ article {
 .meal--empty {
   color: var(--colour-on-surface-variant);
 }
+
+.list__item {
+  font: var(--body-large);
+  --list-x-padding: 16px;
+  padding: 8px var(--list-x-padding);
+
+  a& {
+    align-items: center;
+    color: inherit;
+    display: flex;
+    gap: 16px;
+    justify-content: space-between;
+    min-height: 32px;
+    text-decoration: none;
+
+    > * {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+
+  .icon {
+    color: var(--colour-on-surface-variant);
+    flex-shrink: 0;
+  }
+}
