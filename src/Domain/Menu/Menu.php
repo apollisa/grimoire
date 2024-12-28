@@ -129,10 +129,15 @@ class Menu
      */
     public function groceries(): iterable
     {
-        $groceries = $this->days()
+        $days = $this->days()
             ->map(fn(Day $day): array => $day->groceries())
             ->toArray();
-        return array_merge(...$groceries);
+        $groceries = array_merge(...$days);
+        usort(
+            $groceries,
+            fn(Grocery $a, Grocery $b): int => $a->name() <=> $b->name(),
+        );
+        return $groceries;
     }
 
     public function equals(self $other): bool

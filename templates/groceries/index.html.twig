@@ -7,10 +7,21 @@
         {{ grocery.quantity.value|format_number }} {{ units[grocery.quantity.unit.value] ?? grocery.quantity.unit.value }}
       {% endif %}
     {%- endmacro -%}
-    {% for grocery in groceries|sort((a, b) => a.name <=> b.name) %}
+    {% for grocery in groceries %}
       <li>
         <span class="quantity">{{ _self.format_quantity(grocery) }}</span> {{ grocery.name }}
       </li>
     {% endfor %}
   </ul>
+  <div class="fab">
+    <button
+      aria-label="Exporter"
+      class="button button--fab state"
+      data-action="grocery#export"
+      data-controller="grocery"
+      data-grocery-list-value="{{ groceries|map(grocery => "#{_self.format_quantity(grocery)|trim} #{grocery.name}")|json_encode }}"
+    >
+      {{ ux_icon('tabler:share-3') }}
+    </button>
+  </div>
 {% endblock %}

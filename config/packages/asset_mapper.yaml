@@ -4,6 +4,8 @@ framework:
     missing_import_mode: strict
     paths:
       - assets/
+sensiolabs_typescript:
+  source_dir: ["%kernel.project_dir%/assets/controllers"]
 when@prod:
   framework:
     asset_mapper:

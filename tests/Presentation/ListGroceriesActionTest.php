@@ -20,4 +20,9 @@ class ListGroceriesActionTest extends WebTestCase
     {
         self::assertSelectorTextContains("li ~ li", "1 kg patates");
     }
+
+    public function testDisplayExportButton(): void
+    {
+        self::assertSelectorExists("[aria-label='Exporter']");
+    }
 }

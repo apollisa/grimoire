@@ -15,7 +15,9 @@ jobs:
         uses: actions/cache@v4
         with:
           key: ${{ runner.os }}-php-dev-${{ hashFiles('**/composer.lock') }}
-          path: vendor
+          path: |
+            vendor
+            var/swc-*
           restore-keys: ${{ runner.os }}-php-dev-
       - name: Install Composer dependencies
         run: composer install --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --quiet
@@ -28,6 +30,15 @@ jobs:
           restore-keys: ${{ runner.os }}-npm-
       - name: Install npm dependencies
         run: npm install
+      - name: Cache Asset Mapper packages
+        id: asset-mapper-cache
+        uses: actions/cache@v4
+        with:
+          key: ${{ runner.os }}-am-${{ hashFiles('**/importmap.php') }}
+          path: assets/vendor
+          restore-keys: ${{ runner.os }}-am-
+      - name: Install asset mapper dependencies
+        run: php bin/console importmap:install
       - name: Check formatting
         run: npx prettier . --check
       - name: Lint container
@@ -42,6 +53,8 @@ jobs:
         run: php bin/console --env=test -n doctrine:migrations:migrate
       - name: Load fixtures
         run: php bin/console --env=test -n doctrine:fixtures:load
+      - name: Compile assets
+        run: php bin/console --env=prod typescript:build
       - name: Run tests
         run: php bin/phpunit
   build:
@@ -57,10 +70,21 @@ jobs:
         uses: actions/cache@v4
         with:
           key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-          path: vendor
+          path: |
+            vendor
+            var/swc-*
           restore-keys: ${{ runner.os }}-php-
       - name: Install Composer dependencies
         run: composer install --classmap-authoritative --no-ansi --no-dev --no-interaction --no-scripts --no-progress --prefer-dist --quiet
+      - name: Cache Asset Mapper packages
+        id: asset-mapper-cache
+        uses: actions/cache@v4
+        with:
+          key: ${{ runner.os }}-am-${{ hashFiles('**/importmap.php') }}
+          path: assets/vendor
+          restore-keys: ${{ runner.os }}-am-
+      - name: Install asset mapper dependencies
+        run: php bin/console importmap:install
       - name: Compile assets
         run: php bin/console --env=prod asset-map:compile
       - name: Cleanup
