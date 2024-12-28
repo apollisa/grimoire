@@ -29,11 +29,15 @@ class Day
     #[OneToMany(Meal::class, "day", ["PERSIST"], orphanRemoval: true)]
     private Collection $meals;
 
+    #[OneToMany(Grocery::class, "day", ["PERSIST"], orphanRemoval: true)]
+    private Collection $groceries;
+
     public function __construct(Menu $menu, DateTimeInterface $date)
     {
         $this->menu = $menu;
         $this->date = $date;
         $this->meals = new ArrayCollection();
+        $this->groceries = new ArrayCollection();
     }
 
     public function date(): DateTimeInterface
@@ -56,16 +60,28 @@ class Day
 
     public function planMeal(Recipe|Remains $meal): void
     {
-        $this->meals->add(
-            $meal instanceof Recipe
-                ? Meal::fromRecipe($meal, $this)
-                : $meal->toMeal($this),
-        );
+        if ($meal instanceof Recipe) {
+            $this->meals->add(Meal::fromRecipe($meal, $this));
+            foreach ($meal->ingredients() as $ingredient) {
+                $this->groceries->add(new Grocery($this, $ingredient));
+            }
+        } else {
+            $this->meals->add($meal->toMeal($this));
+        }
     }
 
     public function clear(): void
     {
         $this->meals->clear();
+        $this->groceries->clear();
+    }
+
+    /**
+     * @return Grocery[]
+     */
+    public function groceries(): array
+    {
+        return $this->groceries->getValues();
     }
 
     public function equals(self $other): bool

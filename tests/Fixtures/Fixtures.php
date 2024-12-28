@@ -5,11 +5,11 @@ namespace App\Tests\Fixtures;
 use App\Domain\Menu\DayOfWeek;
 use App\Domain\Menu\Menu;
 use App\Domain\Recipe\Ingredient;
-use App\Domain\Recipe\Quantity;
 use App\Domain\Recipe\Recipe;
 use App\Domain\Recipe\Seasonality;
 use App\Domain\Recipe\Servings;
-use App\Domain\Recipe\Unit;
+use App\Domain\Shared\Quantity;
+use App\Domain\Shared\Unit;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Clock\DatePoint;
@@ -18,11 +18,15 @@ class Fixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
+        $ingredients = [
+            new Ingredient(new Quantity(1, Unit::KILOGRAMS), "patates"),
+            new Ingredient(new Quantity(30, Unit::GRAMS), "beurre"),
+        ];
         $recipe = new Recipe(
             "Parmentier",
             new Servings(4),
             Seasonality::year(),
-            [new Ingredient(new Quantity(1, Unit::KILOGRAMS), "patates")],
+            $ingredients,
             ["Préparer une purée"],
         );
         $manager->persist($recipe);

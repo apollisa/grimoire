@@ -3,8 +3,8 @@
 namespace App\Infrastructure\Recipe;
 
 use App\Domain\Recipe\Ingredient;
-use App\Domain\Recipe\Quantity;
-use App\Domain\Recipe\Unit;
+use App\Domain\Shared\Quantity;
+use App\Domain\Shared\Unit;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\Type;
 

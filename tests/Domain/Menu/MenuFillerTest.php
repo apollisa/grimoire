@@ -24,7 +24,7 @@ class MenuFillerTest extends TestCase
     protected function setUp(): void
     {
         $picker = self::createStub(RecipePicker::class);
-        $this->recipe = new TestRecipe("Parmentier", new Servings(4));
+        $this->recipe = new TestRecipe("Parmentier", new Servings(4), []);
         $picker->method("getRecipes")->willReturn([$this->recipe]);
         $this->filler = new MenuFiller($picker);
     }

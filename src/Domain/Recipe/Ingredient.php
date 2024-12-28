@@ -2,6 +2,8 @@
 
 namespace App\Domain\Recipe;
 
+use App\Domain\Shared\Quantity;
+
 readonly class Ingredient
 {
     public function __construct(

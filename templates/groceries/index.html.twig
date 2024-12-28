@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+{% block title 'Liste de courses' %}
+{% block content %}
+  <ul>
+    {%- macro format_quantity(grocery) -%}
+      {% if grocery.quantity %}
+        {{ grocery.quantity.value|format_number }} {{ units[grocery.quantity.unit.value] ?? grocery.quantity.unit.value }}
+      {% endif %}
+    {%- endmacro -%}
+    {% for grocery in groceries|sort((a, b) => a.name <=> b.name) %}
+      <li>
+        <span class="quantity">{{ _self.format_quantity(grocery) }}</span> {{ grocery.name }}
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

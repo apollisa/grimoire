@@ -124,6 +124,17 @@ class Menu
         }
     }
 
+    /**
+     * @return iterable<Grocery>
+     */
+    public function groceries(): iterable
+    {
+        $groceries = $this->days()
+            ->map(fn(Day $day): array => $day->groceries())
+            ->toArray();
+        return array_merge(...$groceries);
+    }
+
     public function equals(self $other): bool
     {
         return $this->id === $other->id;
