@@ -1,0 +1,29 @@
+<form action="{{ path('menu_plan', {id: menu.id, day}) }}" method="post">
+  <div class="dialog__text">
+    <p>
+      Ajoutez un reste à vos repas de {{ menu.days[day].date|format_date(pattern='EEEE') }}, ou une nouvelle recette :
+    </p>
+  </div>
+  <div class="field">
+    <select id="choice" name="meal">
+      {% if remains %}
+        <optgroup label="Restes">
+          {% for key, remain in remains %}
+            <option value="{{ key }}">{{ recipes[remain.recipe.value].name }}</option>
+          {% endfor %}
+        </optgroup>
+      {% endif %}
+      <optgroup label="Recettes">
+        {% for key, recipe in rooster %}
+          <option value="{{ key }}">{{ recipe.name }}</option>
+        {% endfor %}
+      </optgroup>
+    </select>
+    <label for="choice">Choisir un repas</label>
+    {{ ux_icon('tabler:chevron-down') }}
+  </div>
+  <div class="dialog__actions">
+    <button class="button button--text state" data-action="new-meal#close" type="button">Annuler</button>
+    <button class="button button--text state">Ajouter</button>
+  </div>
+</form>

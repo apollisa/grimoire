@@ -23,6 +23,8 @@
   --colour-on-surface: oklch(22.45% 0.0113 319.46);
   --colour-on-surface-variant: oklch(39.69% 0.0175 318.68);
   --colour-surface-container: oklch(95.02% 0.015 332.24);
+  --colour-surface-container-high: oklch(93.21% 0.0151 332.25);
+  --colour-outline: oklch(57.04% 0.0186 322.76);
   --colour-outline-variant: oklch(82.94% 0.0194 325.75);
 
   --shape-extra-small: 4px;

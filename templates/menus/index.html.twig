@@ -9,7 +9,17 @@
           <span class="day__month">{{ day.date|format_date(pattern='d MMM') }}</span>
         </h2>
         <div class="day__actions">
-          <form action="{{ path('day_clear', {id: menu.id, day: day.dayOfWeek.value}) }}" method="post">
+          {% set dayOfWeek = day.dayOfWeek.value %}
+          <div
+            data-controller="new-meal"
+            data-new-meal-url-value="{{ path('menu_recipes', {id: menu.id, jour: dayOfWeek}) }}"
+          >
+            <button aria-label="Ajouter un repas" class="button button--icon state" data-action="new-meal#open">
+              {{ ux_icon('tabler:circle-plus') }}
+            </button>
+            <dialog data-new-meal-target="dialog"></dialog>
+          </div>
+          <form action="{{ path('day_clear', {id: menu.id, day: dayOfWeek}) }}" method="post">
             <button
               aria-label="Retirer"
               class="button button--icon state"

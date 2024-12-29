@@ -114,3 +114,94 @@ li {
   --list-x-padding: 16px;
   padding: 8px var(--list-x-padding);
 }
+
+dialog {
+  background-color: var(--colour-surface-container-high);
+  border: 0;
+  border-radius: var(--shape-extra-large);
+  box-sizing: border-box;
+  color: var(--colour-on-surface);
+  font: var(--body-medium);
+  min-width: 280px;
+  opacity: 0;
+  transform: scale(0.7);
+  padding: 24px;
+  transition:
+    display var(--duration-short-3) var(--transition-standard) allow-discrete,
+    opacity var(--duration-short-3) var(--transition-standard),
+    overlay var(--duration-short-3) var(--transition-standard) allow-discrete,
+    transform var(--duration-short-3) var(--transition-standard);
+  width: calc(100vw - 2 * 32px);
+
+  &[open] {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  &::backdrop {
+    background-color: rgba(0, 0, 0, 0.32);
+  }
+}
+
+@starting-style {
+  dialog[open] {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+}
+
+.dialog__text {
+  margin-bottom: 24px;
+}
+
+.dialog__actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 24px;
+}
+
+.field {
+  --icon-right-padding: 12px;
+  position: relative;
+
+  .icon {
+    color: var(--colour-on-surface-variant);
+    position: absolute;
+    right: var(--icon-right-padding);
+    top: 16px;
+    z-index: -1;
+  }
+}
+
+label {
+  background-color: var(--colour-surface-container-high);
+  font: var(--label-medium);
+  left: 16px;
+  padding: 0 4px;
+  position: absolute;
+  top: -0.5lh;
+}
+
+select {
+  appearance: none;
+  background: none;
+  border: 1px solid var(--colour-outline);
+  border-radius: var(--shape-extra-small);
+  color: var(--colour-on-surface);
+  font: var(--body-large);
+  height: 56px;
+  outline: 0;
+  padding: 0 calc(16px + var(--icon-size) + 12px) 0 16px;
+  width: 100%;
+
+  &:focus {
+    border-width: 2px;
+    border-color: var(--colour-primary);
+
+    & ~ label,
+    & ~ .icon {
+      color: var(--colour-primary);
+    }
+  }
+}

@@ -92,7 +92,7 @@ jobs:
           rm -rf .git .github .gitignore
           rm -rf package.json package-lock.json
           rm -rf var
-          rm -rf .env.dev
+          rm -rf .env.dev .symfony.local.yml
           rm -rf bin/phpunit .env.test phpunit.xml.dist tests
           rm -rf .prettierrc
           rm -rf assets
