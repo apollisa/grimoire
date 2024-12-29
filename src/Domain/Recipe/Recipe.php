@@ -83,6 +83,6 @@ class Recipe
 
     public function equals(self $other): bool
     {
-        return $this->id === $other->id;
+        return $this->id == $other->id;
     }
 }

@@ -3,7 +3,6 @@
 namespace App\Application;
 
 use App\Domain\Menu\DayOfWeek;
-use App\Domain\Menu\Meal;
 use App\Domain\Menu\MealId;
 use App\Domain\Menu\MenuId;
 use App\Domain\Menu\MenuRepository;
@@ -28,8 +27,8 @@ class MealAdder
                 $menu->planMeal($day, $this->recipeRepository->ofId($meal));
             } else {
                 foreach ($menu->remains($day) as $remains) {
-                    if ($remains->meal()->id() === $meal) {
-                        $menu->planMeal($day, $meal);
+                    if ($remains->meal()->id() == $meal) {
+                        $menu->planMeal($day, $remains);
                         break;
                     }
                 }
