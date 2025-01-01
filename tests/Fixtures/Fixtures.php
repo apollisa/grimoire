@@ -42,6 +42,7 @@ class Fixtures extends Fixture
         $ingredients = [
             new Ingredient(new Quantity(1, Unit::KILOGRAMS), "patates"),
             new Ingredient(new Quantity(30, Unit::GRAMS), "beurre"),
+            new Ingredient(null, "noix de muscade"),
         ];
         $recipe = new Recipe(
             $folder,

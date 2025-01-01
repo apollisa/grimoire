@@ -18,7 +18,7 @@ class ListGroceriesActionTest extends WebTestCase
 
     public function testListOrderedGroceries(): void
     {
-        self::assertSelectorTextContains("li ~ li", "1 kg patates");
+        self::assertSelectorTextContains("li ~ li", "noix de muscade");
     }
 
     public function testDisplayExportButton(): void
