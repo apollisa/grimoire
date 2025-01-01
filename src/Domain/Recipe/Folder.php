@@ -3,6 +3,7 @@
 namespace App\Domain\Recipe;
 
 use App\Infrastructure\Recipe\FolderIdType;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
@@ -17,9 +18,13 @@ class Folder
     #[Column]
     private string $name;
 
-    public function __construct(string $name)
+    #[Column(type: Types::BOOLEAN)]
+    private bool $isIncludedInMenus;
+
+    public function __construct(string $name, bool $isIncludedInMenus = false)
     {
         $this->name = $name;
+        $this->isIncludedInMenus = $isIncludedInMenus;
     }
 
     public function id(): FolderId
@@ -30,5 +35,10 @@ class Folder
     public function name(): string
     {
         return $this->name;
+    }
+
+    public function isIncludedInMenus(): bool
+    {
+        return $this->isIncludedInMenus;
     }
 }

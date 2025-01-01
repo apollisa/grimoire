@@ -29,7 +29,7 @@ class Fixtures extends Fixture
 
     private function createFolder(ObjectManager $manager): Folder
     {
-        $folder = new Folder("Plats");
+        $folder = new Folder("Plats", true);
         $manager->persist($folder);
         $manager->flush();
         return $folder;

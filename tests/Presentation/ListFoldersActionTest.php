@@ -21,4 +21,9 @@ class ListFoldersActionTest extends WebTestCase
     {
         self::assertSelectorTextContains("a ~ a", "Plats");
     }
+
+    public function testShowsMenuIncludedFolder(): void
+    {
+        self::assertSelectorTextContains("span", "Inclus dans les menus");
+    }
 }

@@ -10,4 +10,9 @@ interface FolderRepository
      * @return iterable<Folder>
      */
     public function all(): iterable;
+
+    /**
+     * @return Folder[]
+     */
+    public function includedInMenus(): array;
 }

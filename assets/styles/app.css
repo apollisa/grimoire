@@ -74,6 +74,20 @@ article {
     }
   }
 
+  div {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &.list__item--two-lined {
+    height: 44px;
+
+    span {
+      color: var(--colour-on-surface-variant);
+      font: var(--body-medium);
+    }
+  }
+
   .icon {
     color: var(--colour-on-surface-variant);
     flex-shrink: 0;

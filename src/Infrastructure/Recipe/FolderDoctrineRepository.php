@@ -25,4 +25,9 @@ class FolderDoctrineRepository extends ServiceEntityRepository implements
     {
         return $this->findBy([], ["name" => "ASC"]);
     }
+
+    public function includedInMenus(): array
+    {
+        return $this->findBy(["isIncludedInMenus" => true]);
+    }
 }

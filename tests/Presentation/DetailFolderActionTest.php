@@ -10,6 +10,6 @@ class DetailFolderActionTest extends WebTestCase
     {
         $client = self::createClient();
         $client->request("GET", "/dossiers/1");
-        self::assertSelectorTextContains("a", "Parmentier");
+        self::assertSelectorTextContains("a.list__item", "Parmentier");
     }
 }

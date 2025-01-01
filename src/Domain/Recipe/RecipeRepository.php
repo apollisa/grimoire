@@ -12,9 +12,10 @@ interface RecipeRepository
     public function ofFolder(Folder $folder): iterable;
 
     /**
+     * @param Folder[] $folders
      * @return Recipe[]
      */
-    public function ofMonth(Month $month): array;
+    public function inFolderAndMonth(array $folders, Month $month): array;
 
     /**
      * @return iterable<Recipe>

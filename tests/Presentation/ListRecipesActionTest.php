@@ -11,6 +11,6 @@ class ListRecipesActionTest extends WebTestCase
         $client = self::createClient();
         $client->request("GET", "/recettes");
 
-        self::assertSelectorTextContains("a", "Parmentier");
+        self::assertSelectorTextContains("a.list__item", "Parmentier");
     }
 }

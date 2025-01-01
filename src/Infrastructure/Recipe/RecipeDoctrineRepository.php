@@ -3,6 +3,7 @@
 namespace App\Infrastructure\Recipe;
 
 use App\Domain\Recipe\Folder;
+use App\Domain\Recipe\FolderId;
 use App\Domain\Recipe\Month;
 use App\Domain\Recipe\Recipe;
 use App\Domain\Recipe\RecipeId;
@@ -28,14 +29,22 @@ class RecipeDoctrineRepository extends ServiceEntityRepository implements
         return $this->findBy(["folder" => $folder->id()], ["name" => "ASC"]);
     }
 
-    public function ofMonth(Month $month): array
+    public function inFolderAndMonth(array $folders, Month $month): array
     {
+        $ids = array_map(
+            fn(Folder $folder): FolderId => $folder->id(),
+            $folders,
+        );
         return $this->getEntityManager()
             ->createQuery(
                 "SELECT r FROM App\Domain\Recipe\Recipe r
-            WHERE :month BETWEEN r.seasonality.starts AND r.seasonality.ends
-               OR r.seasonality.starts > r.seasonality.ends AND (:month >= r.seasonality.starts OR :month <= r.seasonality.ends)",
+            WHERE r.folder IN (:folders)
+              AND (
+                :month BETWEEN r.seasonality.starts AND r.seasonality.ends
+                OR r.seasonality.starts > r.seasonality.ends AND (:month >= r.seasonality.starts OR :month <= r.seasonality.ends)
+              )",
             )
+            ->setParameter("folders", $ids)
             ->setParameter("month", $month)
             ->getResult();
     }

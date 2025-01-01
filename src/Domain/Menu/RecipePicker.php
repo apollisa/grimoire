@@ -2,14 +2,17 @@
 
 namespace App\Domain\Menu;
 
+use App\Domain\Recipe\FolderRepository;
 use App\Domain\Recipe\Month;
 use App\Domain\Recipe\Recipe;
 use App\Domain\Recipe\RecipeRepository;
 
 class RecipePicker
 {
-    public function __construct(private readonly RecipeRepository $repository)
-    {
+    public function __construct(
+        private readonly FolderRepository $folderRepository,
+        private readonly RecipeRepository $recipeRepository,
+    ) {
     }
 
     /**
@@ -17,6 +20,10 @@ class RecipePicker
      */
     public function getRecipes(Menu $menu): array
     {
-        return $this->repository->ofMonth(Month::of($menu->monday()));
+        $folders = $this->folderRepository->includedInMenus();
+        return $this->recipeRepository->inFolderAndMonth(
+            $folders,
+            Month::of($menu->monday()),
+        );
     }
 }
