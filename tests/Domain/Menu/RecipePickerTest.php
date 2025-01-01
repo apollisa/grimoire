@@ -8,6 +8,7 @@ use App\Domain\Recipe\Month;
 use App\Domain\Recipe\Recipe;
 use App\Domain\Recipe\Seasonality;
 use App\Domain\Recipe\Servings;
+use App\Tests\Fixtures\TestFolder;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Clock\DatePoint;
@@ -30,8 +31,10 @@ class RecipePickerTest extends KernelTestCase
 
     private function addRecipe(Seasonality $seasonality): void
     {
+        $folder = new TestFolder();
+        $servings = new Servings(2);
         $this->manager->persist(
-            new Recipe("Carbonara", new Servings(2), $seasonality, [], []),
+            new Recipe($folder, "Carbonara", $servings, $seasonality, [], []),
         );
     }
 

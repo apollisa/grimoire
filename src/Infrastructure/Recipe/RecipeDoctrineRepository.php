@@ -2,6 +2,7 @@
 
 namespace App\Infrastructure\Recipe;
 
+use App\Domain\Recipe\Folder;
 use App\Domain\Recipe\Month;
 use App\Domain\Recipe\Recipe;
 use App\Domain\Recipe\RecipeId;
@@ -20,6 +21,11 @@ class RecipeDoctrineRepository extends ServiceEntityRepository implements
     public function ofId(RecipeId $id): Recipe
     {
         return $this->find($id);
+    }
+
+    public function ofFolder(Folder $folder): iterable
+    {
+        return $this->findBy(["folder" => $folder->id()], ["name" => "ASC"]);
     }
 
     public function ofMonth(Month $month): array

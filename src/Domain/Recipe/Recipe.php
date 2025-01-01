@@ -2,6 +2,7 @@
 
 namespace App\Domain\Recipe;
 
+use App\Infrastructure\Recipe\FolderIdType;
 use App\Infrastructure\Recipe\IngredientsType;
 use App\Infrastructure\Recipe\RecipeIdType;
 use Doctrine\DBAL\Types\Types;
@@ -16,6 +17,9 @@ class Recipe
 {
     #[Id, GeneratedValue, Column(type: RecipeIdType::NAME)]
     private ?RecipeId $id = null;
+
+    #[Column("folder_id", FolderIdType::NAME)]
+    private FolderId $folder;
 
     #[Column]
     private string $name;
@@ -37,12 +41,14 @@ class Recipe
      * @param iterable<string> $instructions
      */
     public function __construct(
+        Folder $folder,
         string $name,
         Servings $servings,
         Seasonality $seasonality,
         array $ingredients,
         array $instructions,
     ) {
+        $this->folder = $folder->id();
         $this->name = $name;
         $this->servings = $servings;
         $this->seasonality = $seasonality;

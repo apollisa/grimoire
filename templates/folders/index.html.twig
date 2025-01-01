@@ -1,0 +1,7 @@
+{% extends 'base.html.twig' %}
+{% block title 'Dossiers' %}
+{% block content %}
+  {% set links = [{name: 'Toutes vos recettes', url: path('recipe_list')}] %}
+  {% set links = links|merge(folders|map(folder => {name: folder.name, url: path('folder_detail', {id: folder.id})})) %}
+  {{ include('shared/_nav-list.html.twig', {links}, with_context=false) }}
+{% endblock %}

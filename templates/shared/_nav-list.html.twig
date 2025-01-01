@@ -1,0 +1,7 @@
+<nav>
+  {% for link in links %}
+    <a class="list__item state" href="{{ link.url }}">
+      <span>{{ link.name }}</span> {{ ux_icon('tabler:chevron-right') }}
+    </a>
+  {% endfor %}
+</nav>

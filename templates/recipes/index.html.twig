@@ -1,11 +1,12 @@
 {% extends 'base.html.twig' %}
 {% block title 'Toutes vos recettes' %}
+{% block header %}
+  <header>
+    <a class="button button--icon state" href="{{ path('folder_list') }}">{{ ux_icon('tabler:arrow-left') }}</a>
+    {{ parent() }}
+  </header>
+{% endblock %}
 {% block content %}
-  <nav>
-    {% for recipe in recipes %}
-      <a class="list__item state" href="{{ path('recipe_display', {id: recipe.id}) }}">
-        <span>{{ recipe.name }}</span> {{ ux_icon('tabler:chevron-right') }}
-      </a>
-    {% endfor %}
-  </nav>
+  {% set links = recipes|map(recipe => {name: recipe.name, url: path('recipe_display', {id: recipe.id})}) %}
+  {{ include('shared/_nav-list.html.twig', {links}, with_context=false) }}
 {% endblock %}

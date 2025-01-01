@@ -19,6 +19,7 @@ class TestRecipe extends Recipe
         array $ingredients,
     ) {
         parent::__construct(
+            new TestFolder(),
             $name,
             $servings,
             Seasonality::year(),
