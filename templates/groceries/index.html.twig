@@ -4,7 +4,7 @@
   <ul>
     {%- macro format_quantity(grocery) -%}
       {% if grocery.quantity %}
-        {{ grocery.quantity.value|format_number }} {{ units[grocery.quantity.unit.value] ?? grocery.quantity.unit.value }}
+        {{ grocery.quantity.value|format_number }} {{ units[grocery.quantity.unit.value] ?? grocery.quantity.unit.value }}
       {% endif %}
     {%- endmacro -%}
     {% for grocery in groceries %}

@@ -18,7 +18,7 @@ class DisplayRecipeActionTest extends WebTestCase
 
     public function testDisplayRecipeIngredients(): void
     {
-        self::assertSelectorTextContains("li", "1 kg patates");
+        self::assertSelectorTextContains("li", "1 kg patates");
     }
 
     public function testDisplayRecipeInstructions(): void

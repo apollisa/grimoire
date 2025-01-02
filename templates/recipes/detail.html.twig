@@ -8,7 +8,7 @@
         {% set quantity = ingredient.quantity %}
         {% if quantity %}
           <span class="quantity">
-            {{ quantity.value|format_number }} {{ units[quantity.unit.value] ?? quantity.unit.value }}
+            {{ quantity.value|format_number }} {{ units[quantity.unit.value] ?? quantity.unit.value }}
           </span> {{ ingredient.name }}
         {% else %}
           {{ ingredient.name|capitalize }}
