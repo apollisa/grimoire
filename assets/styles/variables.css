@@ -1,4 +1,6 @@
 :root {
+  color-scheme: light dark;
+
   --typeface-brand: ui-rounded, "Hiragino Maru Gothic ProN", Quicksand,
     Comfortaa, Manjari, "Arial Rounded MT", "Arial Rounded MT Bold", Calibri,
     source-sans-pro, sans-serif;
@@ -13,19 +15,55 @@
   --label-large: 500 0.875rem / 1.25rem var(--typeface-plain);
   --label-medium: 500 0.75rem / 1rem var(--typeface-plain);
 
-  --colour-primary: oklch(49.19% 0.0933 313.85);
-  --colour-on-primary: oklch(100% 0 0);
-  --colour-secondary-container: oklch(91.77% 0.0386 320.6);
-  --colour-on-secondary-container: oklch(22.8% 0.0364 315.67);
-  --colour-tertiary-container: oklch(91.9% 0.0414 19.77);
-  --colour-on-tertiary-container: oklch(23.23% 0.0552 20.61);
-  --colour-surface: oklch(98.37% 0.0107 339.33);
-  --colour-on-surface: oklch(22.45% 0.0113 319.46);
-  --colour-on-surface-variant: oklch(39.69% 0.0175 318.68);
-  --colour-surface-container: oklch(95.02% 0.015 332.24);
-  --colour-surface-container-high: oklch(93.21% 0.0151 332.25);
-  --colour-outline: oklch(57.04% 0.0186 322.76);
-  --colour-outline-variant: oklch(82.94% 0.0194 325.75);
+  --colour-primary: light-dark(
+    oklch(49.19% 0.0933 313.85),
+    oklch(83.72% 0.0951 315.81)
+  );
+  --colour-on-primary: light-dark(oklch(100% 0 0), oklch(32.08% 0.0924 312.81));
+  --colour-secondary-container: light-dark(
+    oklch(91.77% 0.0386 320.6),
+    oklch(40.09% 0.0361 317.12)
+  );
+  --colour-on-secondary-container: light-dark(
+    oklch(22.8% 0.0364 315.67),
+    oklch(91.77% 0.0386 320.6)
+  );
+  --colour-tertiary-container: light-dark(
+    oklch(91.9% 0.0414 19.77),
+    oklch(40.45% 0.061 20.08)
+  );
+  --colour-on-tertiary-container: light-dark(
+    oklch(23.23% 0.0552 20.61),
+    oklch(91.9% 0.0414 19.77)
+  );
+  --colour-surface: light-dark(
+    oklch(98.37% 0.0107 339.33),
+    oklch(18.93% 0.0118 319.46)
+  );
+  --colour-on-surface: light-dark(
+    oklch(22.45% 0.0113 319.46),
+    oklch(91.58% 0.0135 333.05)
+  );
+  --colour-on-surface-variant: light-dark(
+    oklch(39.69% 0.0175 318.68),
+    oklch(82.94% 0.0194 325.75)
+  );
+  --colour-surface-container: light-dark(
+    oklch(95.02% 0.015 332.24),
+    oklch(24.21% 0.0127 314.57)
+  );
+  --colour-surface-container-high: light-dark(
+    oklch(93.21% 0.0151 332.25),
+    oklch(28.47% 0.0129 320.6)
+  );
+  --colour-outline: light-dark(
+    oklch(57.04% 0.0186 322.76),
+    oklch(65.77% 0.0179 322.74)
+  );
+  --colour-outline-variant: light-dark(
+    oklch(82.94% 0.0194 325.75),
+    oklch(39.69% 0.0175 318.68)
+  );
 
   --shape-extra-small: 4px;
   --shape-medium: 12px;
