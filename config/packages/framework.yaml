@@ -1,6 +1,4 @@
 framework:
-  default_locale: "fr"
-  enabled_locales: ["fr"]
   secret: "%env(APP_SECRET)%"
   session: true
 when@test:

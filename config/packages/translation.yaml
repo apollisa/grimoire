@@ -1,0 +1,7 @@
+framework:
+  default_locale: "fr"
+  enabled_locales: ["fr"]
+  translator:
+    fallbacks:
+      - fr
+    formatter: App\Infrastructure\Shared\MessageFormatter

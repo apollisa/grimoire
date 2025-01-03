@@ -34,10 +34,6 @@ main {
 
 p {
   margin: 0;
-
-  &:not(:last-child) {
-    margin-bottom: 8px;
-  }
 }
 
 .navbar {

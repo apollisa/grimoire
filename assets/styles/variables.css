@@ -29,6 +29,7 @@
 
   --shape-extra-small: 4px;
   --shape-medium: 12px;
+  --shape-large: 24px;
   --shape-extra-large: 28px;
 
   ---elevation-1: 0 1px 2px 0 rgb(0 0 0 / 30%), 0 1px 3px 1px rgb(0 0 0 / 15%);

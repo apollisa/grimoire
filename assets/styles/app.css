@@ -94,6 +94,21 @@ article {
   }
 }
 
+.recipe__servings {
+  --icon-size: 1.2em;
+  background-color: var(--colour-secondary-container);
+  border-radius: var(--shape-large);
+  color: var(--colour-on-secondary-container);
+  display: inline-block;
+  font: var(--label-large);
+  margin: 0 0 16px;
+  padding: 8px 12px 8px 8px;
+
+  .icon {
+    color: var(--colour-primary);
+  }
+}
+
 .recipe__section {
   font: var(--title-large);
   margin: 0 0 8px;

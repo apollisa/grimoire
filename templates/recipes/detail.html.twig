@@ -1,6 +1,10 @@
 {% extends 'base.html.twig' %}
 {% block title recipe.name %}
 {% block content %}
+  <p class="recipe__servings">
+    {{ ux_icon('tabler:tools-kitchen-2') }}
+    {{ '{servings, plural, one {1 part} other {# parts}}'|trans({servings: recipe.servings.value}) }}
+  </p>
   <h2 class="recipe__section">Ingrédients</h2>
   <ul class="ingredients">
     {% for ingredient in recipe.ingredients %}

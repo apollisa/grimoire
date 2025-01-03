@@ -19,6 +19,11 @@ readonly class Servings
     ) {
     }
 
+    public function value(): int
+    {
+        return $this->value;
+    }
+
     public function isMoreThan(self $other): bool
     {
         return $this->value > $other->value;
