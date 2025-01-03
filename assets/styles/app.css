@@ -34,19 +34,14 @@ article {
 
 .icon {
   height: var(--icon-size);
+  vertical-align: sub;
   width: var(--icon-size);
 }
 
 .recipe {
-  align-items: center;
+  --icon-size: 1.2em;
   color: var(--colour-primary);
-  display: flex;
-  gap: 8px;
   text-decoration: none;
-
-  .icon {
-    --icon-size: 18px;
-  }
 }
 
 .meal--empty {
