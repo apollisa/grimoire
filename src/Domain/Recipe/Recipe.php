@@ -2,6 +2,7 @@
 
 namespace App\Domain\Recipe;
 
+use App\Domain\Shared\TimeTrackedEntity;
 use App\Infrastructure\Recipe\FolderIdType;
 use App\Infrastructure\Recipe\IngredientsType;
 use App\Infrastructure\Recipe\RecipeIdType;
@@ -13,7 +14,7 @@ use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
 
 #[Entity]
-class Recipe
+class Recipe extends TimeTrackedEntity
 {
     #[Id, GeneratedValue, Column(type: RecipeIdType::NAME)]
     private ?RecipeId $id = null;
@@ -48,6 +49,7 @@ class Recipe
         array $ingredients,
         array $instructions,
     ) {
+        parent::__construct();
         $this->folder = $folder->id();
         $this->name = $name;
         $this->servings = $servings;
