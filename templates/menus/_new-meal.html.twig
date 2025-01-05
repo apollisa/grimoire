@@ -1,8 +1,6 @@
 <form action="{{ path('menu_plan', {id: menu.id, day}) }}" method="post">
   <div class="dialog__text">
-    <p>
-      Ajoutez un reste à vos repas de {{ menu.days[day].date|format_date(pattern='EEEE') }}, ou une nouvelle recette :
-    </p>
+    <p>Ajoutez un reste à vos repas de {{ days[day] }}, ou une nouvelle recette :</p>
   </div>
   <div class="field">
     <select id="choice" name="meal">
