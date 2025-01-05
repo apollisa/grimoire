@@ -19,7 +19,8 @@ class Fixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        $folder = $this->createFolder($manager);
+        $folder = $this->createFolder($manager, "Plats");
+        $this->createFolder($manager, "Cocktails");
         $recipe = $this->createRecipe($folder, $manager);
         $menu = new Menu(new DatePoint("2024-08-26"));
         $menu->planMeal(DayOfWeek::TUESDAY, $recipe);
@@ -27,9 +28,9 @@ class Fixtures extends Fixture
         $manager->flush();
     }
 
-    private function createFolder(ObjectManager $manager): Folder
+    private function createFolder(ObjectManager $manager, string $name): Folder
     {
-        $folder = new Folder("Plats", true);
+        $folder = new Folder($name, true);
         $manager->persist($folder);
         $manager->flush();
         return $folder;

@@ -111,52 +111,6 @@ li {
   padding: 8px var(--list-x-padding);
 }
 
-dialog {
-  background-color: var(--colour-surface-container-high);
-  border: 0;
-  border-radius: var(--shape-extra-large);
-  box-sizing: border-box;
-  color: var(--colour-on-surface);
-  font: var(--body-medium);
-  min-width: 280px;
-  opacity: 0;
-  transform: scale(0.7);
-  padding: 24px;
-  transition:
-    display var(--duration-short-3) var(--transition-standard) allow-discrete,
-    opacity var(--duration-short-3) var(--transition-standard),
-    overlay var(--duration-short-3) var(--transition-standard) allow-discrete,
-    transform var(--duration-short-3) var(--transition-standard);
-  width: calc(100vw - 2 * 32px);
-
-  &[open] {
-    opacity: 1;
-    transform: scale(1);
-  }
-
-  &::backdrop {
-    background-color: rgba(0, 0, 0, 0.32);
-  }
-}
-
-@starting-style {
-  dialog[open] {
-    opacity: 0;
-    transform: scale(0.7);
-  }
-}
-
-.dialog__text {
-  margin-bottom: 24px;
-}
-
-.dialog__actions {
-  display: flex;
-  gap: 8px;
-  justify-content: flex-end;
-  margin-top: 24px;
-}
-
 .field {
   --icon-right-padding: 12px;
   position: relative;
@@ -171,33 +125,54 @@ dialog {
 }
 
 label {
-  background-color: var(--colour-surface-container-high);
+  background-color: var(--background, var(--colour-surface-container-high));
   font: var(--label-medium);
-  left: 16px;
+  left: 12px;
   padding: 0 4px;
   position: absolute;
   top: -0.5lh;
 }
 
-select {
+input,
+select,
+textarea {
   appearance: none;
   background: none;
   border: 1px solid var(--colour-outline);
   border-radius: var(--shape-extra-small);
+  box-sizing: border-box;
+  caret-color: var(--colour-primary);
   color: var(--colour-on-surface);
   font: var(--body-large);
   height: 56px;
+  margin: 0;
   outline: 0;
-  padding: 0 calc(16px + var(--icon-size) + 12px) 0 16px;
+  padding: 16px;
   width: 100%;
 
   &:focus {
     border-width: 2px;
     border-color: var(--colour-primary);
+    padding: 15px;
 
     & ~ label,
     & ~ .icon {
       color: var(--colour-primary);
     }
   }
+}
+
+select {
+  padding: 0 calc(16px + var(--icon-size) + 12px) 0 16px;
+}
+
+textarea {
+  height: 7.5lh;
+  resize: vertical;
+}
+
+.help-text {
+  color: var(--colour-on-surface-variant);
+  font: var(--body-small);
+  margin: 4px 16px 0;
 }

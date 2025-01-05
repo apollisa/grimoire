@@ -1,0 +1,18 @@
+{{ form_start(form, {attr: {'data-action': 'input->new-recipe#update', 'data-new-recipe-target': 'form'}}) }}
+  <div class="dialog__header">
+    <h2>Nouvelle recette</h2>
+    <button class="button button--icon state" data-action="new-recipe#close" type="button">
+      {{ ux_icon('tabler:x') }}
+    </button>
+    <button class="button button--text state" data-new-recipe-target="submit" disabled>Ajouter</button>
+  </div>
+  <div class="new-recipe__form">
+    {{ form_row(form.folder, {attr: {autofocus: true}}) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.servings) }}
+    {{ form_row(form.starts, {row_attr: {class: 'new-recipe__seasonality'}}) }}
+    {{ form_row(form.ends, {row_attr: {class: 'new-recipe__seasonality'}}) }}
+    {{ form_row(form.ingredients, {attr: {autocapitalize: 'off'}}) }}
+    {{ form_row(form.instructions) }}
+  </div>
+{{ form_end(form) }}

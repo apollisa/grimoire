@@ -1,2 +1,3 @@
 {% extends 'recipes/index.html.twig' %}
 {% block title folder.name %}
+{% block url path('recipe_add', {dossier: folder.id}) %}

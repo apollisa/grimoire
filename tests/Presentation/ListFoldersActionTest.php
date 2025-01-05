@@ -19,7 +19,7 @@ class ListFoldersActionTest extends WebTestCase
 
     public function testDisplaysFolder(): void
     {
-        self::assertSelectorTextContains("a ~ a", "Plats");
+        self::assertSelectorTextContains("a ~ a", "Cocktails");
     }
 
     public function testShowsMenuIncludedFolder(): void

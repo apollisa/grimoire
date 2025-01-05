@@ -53,4 +53,10 @@ class RecipeDoctrineRepository extends ServiceEntityRepository implements
     {
         return $this->findBy([], ["name" => "ASC"]);
     }
+
+    public function add(Recipe $recipe): Recipe
+    {
+        $this->getEntityManager()->persist($recipe);
+        return $recipe;
+    }
 }

@@ -21,4 +21,6 @@ interface RecipeRepository
      * @return iterable<Recipe>
      */
     public function all(): iterable;
+
+    public function add(Recipe $recipe): Recipe;
 }

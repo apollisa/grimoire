@@ -12,6 +12,7 @@
   --title-small: 500 0.875rem / 1.25rem var(--typeface-plain);
   --body-large: 400 1rem / 1.5rem var(--typeface-plain);
   --body-medium: 400 0.875rem / 1.25rem var(--typeface-plain);
+  --body-small: 400 0.75rem / 1rem var(--typeface-plain);
   --label-large: 500 0.875rem / 1.25rem var(--typeface-plain);
   --label-medium: 500 0.75rem / 1rem var(--typeface-plain);
 

@@ -1,5 +1,22 @@
 parameters:
   .container.dumper.inline_factories: true
+  app.months:
+    1: janvier
+    2: février
+    3: mars
+    4: avril
+    5: mai
+    6: juin
+    7: juillet
+    8: août
+    9: septembre
+    10: octobre
+    11: novembre
+    12: décembre
+  app.units:
+    pinch: pincée
+    tbsp.: c.-à-s.
+    tsp.: c.-à-c.
 services:
   _defaults:
     autoconfigure: true

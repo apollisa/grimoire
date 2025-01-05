@@ -1,5 +1,6 @@
 twig:
   file_name_pattern: "*.twig"
+  form_themes: ["shared/form.html.twig"]
   globals:
     csp: '@App\Infrastructure\Shared\ContentSecurityPolicyGenerator'
     days:
@@ -10,10 +11,7 @@ twig:
       5: vendredi
       6: samedi
       7: dimanche
-    units:
-      pinch: pincée
-      tbsp.: c.-à-s.
-      tsp.: c.-à-c.
+    units: "%app.units%"
 when@test:
   twig:
     strict_variables: true

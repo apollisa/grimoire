@@ -8,6 +8,7 @@ enum Unit: string
     case DECILITRES = "dL";
     case GRAMS = "g";
     case KILOGRAMS = "kg";
+    case LITRES = "L";
     case MILLILITRES = "mL";
     case PINCH = "pinch";
     case TBSP = "tbsp.";

@@ -9,4 +9,14 @@
 {% block content %}
   {% set links = recipes|map(recipe => {name: recipe.name, url: path('recipe_display', {id: recipe.id})}) %}
   {{ include('shared/_nav-list.html.twig', {links}, with_context=false) }}
+  <div
+    class="fab"
+    data-controller="new-recipe"
+    data-new-recipe-url-value="{% block url %}{{ path('recipe_add') }}{% endblock %}"
+  >
+    <button aria-label="Ajouter une recette" class="button button--fab state" data-action="new-recipe#open">
+      {{ ux_icon('tabler:plus') }}
+    </button>
+    <dialog class="full-screen" data-new-recipe-target="dialog"></dialog>
+  </div>
 {% endblock %}

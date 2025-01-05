@@ -145,3 +145,18 @@ article {
     }
   }
 }
+
+.new-recipe__form {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: fit-content(56px);
+
+  .field {
+    grid-column: span 2;
+  }
+
+  .new-recipe__seasonality {
+    grid-column: span 1;
+  }
+}
