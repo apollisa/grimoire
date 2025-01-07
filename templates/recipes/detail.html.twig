@@ -1,9 +1,18 @@
 {% extends 'base.html.twig' %}
 {% block title recipe.name %}
 {% block content %}
-  <p class="recipe__servings">
+  <p class="recipe__detail">
     {{ ux_icon('tabler:tools-kitchen-2') }}
     {{ '{servings, plural, one {1 part} other {# parts}}'|trans({servings: recipe.servings.value}) }}
+  </p>
+  <p class="recipe__detail">
+    {{ ux_icon('tabler:sun') }}
+    {% set seasonality = recipe.seasonality %}
+    {% if seasonality.isYearRound %}
+      Toute l’année
+    {% else %}
+      {{ months[seasonality.starts.value]|capitalize }} à {{ months[seasonality.ends.value] }}
+    {% endif %}
   </p>
   <h2 class="recipe__section">Ingrédients</h2>
   <ul class="ingredients">

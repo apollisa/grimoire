@@ -89,7 +89,7 @@ article {
   }
 }
 
-.recipe__servings {
+.recipe__detail {
   --icon-size: 1.2em;
   background-color: var(--colour-secondary-container);
   border-radius: var(--shape-large);

@@ -73,6 +73,11 @@ class Recipe extends TimeTrackedEntity
         return $this->servings;
     }
 
+    public function seasonality(): Seasonality
+    {
+        return $this->seasonality;
+    }
+
     /**
      * @return iterable<Ingredient>
      */

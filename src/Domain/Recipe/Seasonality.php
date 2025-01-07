@@ -18,4 +18,20 @@ readonly class Seasonality
         #[Column] private Month $ends,
     ) {
     }
+
+    public function isYearRound(): bool
+    {
+        return $this->starts() === Month::JANUARY &&
+            $this->ends() === Month::DECEMBER;
+    }
+
+    public function starts(): Month
+    {
+        return $this->starts;
+    }
+
+    public function ends(): Month
+    {
+        return $this->ends;
+    }
 }
