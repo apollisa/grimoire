@@ -30,4 +30,9 @@ class DisplayRecipeActionTest extends WebTestCase
     {
         self::assertSelectorTextContains("p", "4 parts");
     }
+
+    public function testDisplayRecipeFolder(): void
+    {
+        self::assertAnySelectorTextContains("main p", "Plats");
+    }
 }

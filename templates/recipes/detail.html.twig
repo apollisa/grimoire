@@ -14,6 +14,7 @@
       {{ months[seasonality.starts.value]|capitalize }} à {{ months[seasonality.ends.value] }}
     {% endif %}
   </p>
+  <p class="recipe__detail">{{ ux_icon('tabler:folder') }} {{ folder.name }}</p>
   <h2 class="recipe__section">Ingrédients</h2>
   <ul class="ingredients">
     {% for ingredient in recipe.ingredients %}

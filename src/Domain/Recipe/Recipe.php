@@ -63,6 +63,11 @@ class Recipe extends TimeTrackedEntity
         return $this->id;
     }
 
+    public function folder(): FolderId
+    {
+        return $this->folder;
+    }
+
     public function name(): string
     {
         return $this->name;
