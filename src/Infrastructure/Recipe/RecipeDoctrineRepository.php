@@ -40,7 +40,7 @@ class RecipeDoctrineRepository extends ServiceEntityRepository implements
                 "SELECT r FROM App\Domain\Recipe\Recipe r
             WHERE r.folder IN (:folders)
               AND (
-                :month BETWEEN r.seasonality.starts AND r.seasonality.ends
+                :month BETWEEN COALESCE(r.seasonality.starts, 1) AND COALESCE(r.seasonality.ends, 12)
                 OR r.seasonality.starts > r.seasonality.ends AND (:month >= r.seasonality.starts OR :month <= r.seasonality.ends)
               )",
             )

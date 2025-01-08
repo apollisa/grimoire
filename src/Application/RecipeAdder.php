@@ -28,14 +28,26 @@ class RecipeAdder
                 $this->folderRepository->ofId(new FolderId($command->folder)),
                 $command->name,
                 new Servings($command->servings),
-                new Seasonality(
-                    Month::from($command->starts),
-                    Month::from($command->ends),
-                ),
+                $this->getSeasonality($command),
                 $this->transformer->transform($command->ingredients),
                 $command->instructions,
             );
             return $this->recipeRepository->add($recipe);
         });
+    }
+
+    private function getSeasonality(AddRecipeCommand $command): ?Seasonality
+    {
+        if ($command->starts === null && $command->ends === null) {
+            return null;
+        } elseif ($command->starts === null || $command->ends === null) {
+            $month = Month::from($command->starts ?? $command->ends);
+            return new Seasonality($month, $month);
+        } else {
+            return new Seasonality(
+                Month::from($command->starts),
+                Month::from($command->ends),
+            );
+        }
     }
 }

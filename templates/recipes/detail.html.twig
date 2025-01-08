@@ -5,15 +5,17 @@
     {{ ux_icon('tabler:tools-kitchen-2') }}
     {{ '{servings, plural, one {1 part} other {# parts}}'|trans({servings: recipe.servings.value}) }}
   </p>
-  <p class="recipe__detail">
-    {{ ux_icon('tabler:sun') }}
-    {% set seasonality = recipe.seasonality %}
-    {% if seasonality.isYearRound %}
-      Toute l’année
-    {% else %}
-      {{ months[seasonality.starts.value]|capitalize }} à {{ months[seasonality.ends.value] }}
-    {% endif %}
-  </p>
+  {% if recipe.seasonality %}
+    <p class="recipe__detail">
+      {{ ux_icon('tabler:sun') }}
+      {% set seasonality = recipe.seasonality %}
+      {% if seasonality.isYearRound %}
+        Toute l’année
+      {% else %}
+        {{ months[seasonality.starts.value]|capitalize }} à {{ months[seasonality.ends.value] }}
+      {% endif %}
+    </p>
+  {% endif %}
   <p class="recipe__detail">{{ ux_icon('tabler:folder') }} {{ folder.name }}</p>
   <h2 class="recipe__section">Ingrédients</h2>
   <ul class="ingredients">

@@ -29,7 +29,7 @@ class Recipe extends TimeTrackedEntity
     private Servings $servings;
 
     #[Embedded]
-    private Seasonality $seasonality;
+    private ?Seasonality $seasonality;
 
     #[Column(type: IngredientsType::NAME)]
     private array $ingredients;
@@ -45,7 +45,7 @@ class Recipe extends TimeTrackedEntity
         Folder $folder,
         string $name,
         Servings $servings,
-        Seasonality $seasonality,
+        ?Seasonality $seasonality,
         array $ingredients,
         array $instructions,
     ) {
@@ -78,7 +78,7 @@ class Recipe extends TimeTrackedEntity
         return $this->servings;
     }
 
-    public function seasonality(): Seasonality
+    public function seasonality(): ?Seasonality
     {
         return $this->seasonality;
     }

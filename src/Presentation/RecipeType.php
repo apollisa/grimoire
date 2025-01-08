@@ -41,8 +41,14 @@ class RecipeType extends AbstractType
                 "attr" => ["min" => 1],
                 "label" => "Parts",
             ])
-            ->add("starts", MonthType::class, ["label" => "De"])
-            ->add("ends", MonthType::class, ["label" => "À"])
+            ->add("starts", MonthType::class, [
+                "label" => "De",
+                "required" => false,
+            ])
+            ->add("ends", MonthType::class, [
+                "label" => "À",
+                "required" => false,
+            ])
             ->add($this->getIngredientField($builder))
             ->add($this->getInstructionField($builder));
     }
