@@ -2,13 +2,22 @@
 
 namespace App\Tests\Presentation;
 
+use App\Domain\Recipe\FolderId;
+use App\Domain\Recipe\FolderRepository;
+use App\Domain\Recipe\Recipe;
+use App\Domain\Recipe\Servings;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\BrowserKit\AbstractBrowser;
 
 class DisplayRecipeActionTest extends WebTestCase
 {
+    private AbstractBrowser $client;
+
     protected function setUp(): void
     {
-        self::createClient()->request("GET", "/recettes/1");
+        $this->client = self::createClient();
+        $this->client->request("GET", "/recettes/1");
     }
 
     public function testDisplayRecipe(): void
@@ -34,5 +43,21 @@ class DisplayRecipeActionTest extends WebTestCase
     public function testDisplayRecipeFolder(): void
     {
         self::assertAnySelectorTextContains("main p", "Plats");
+    }
+
+    public function testDoesNotDisplayEmptyInstructions(): void
+    {
+        $container = self::getContainer();
+        $folder = $container
+            ->get(FolderRepository::class)
+            ->ofId(new FolderId(1));
+        $manager = $container->get(EntityManagerInterface::class);
+        $recipe = new Recipe($folder, "Pâtes", new Servings(2), null, [], []);
+        $manager->persist($recipe);
+        $manager->flush();
+
+        $this->client->request("GET", "/recettes/{$recipe->id()}");
+
+        self::assertAnySelectorTextNotContains("h2", "Instructions");
     }
 }
