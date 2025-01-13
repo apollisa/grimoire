@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+{% block title 'Nouvelle recette' %}
+{% block header %}
+  <header>
+    <a class="button button--icon state" href="{{ path('recipe_list') }}">{{ ux_icon('tabler:arrow-left') }}</a>
+    {{ parent() }}
+  </header>
+{% endblock %}
+{% block content %}
+  {{ form_start(form, {attr: {'data-action': 'input->new-recipe#update', 'data-new-recipe-target': 'form'}}) }}
+    {% if fragment %}
+      <div class="dialog__header">
+        <h2>Nouvelle recette</h2>
+        <button class="button button--icon state" data-action="new-recipe#close" type="button">
+          {{ ux_icon('tabler:x') }}
+        </button>
+        <button class="button button--text state" data-new-recipe-target="submit">Ajouter</button>
+      </div>
+    {% endif %}
+    <div class="new-recipe__form {% if not fragment %}new-recipe__form--full{% endif %}">
+      {{ form_row(form.folder, {attr: {autofocus: true}}) }}
+      {{ form_row(form.name) }}
+      {{ form_row(form.servings) }}
+      {{ form_row(form.starts, {row_attr: {class: 'new-recipe__seasonality'}}) }}
+      {{ form_row(form.ends, {row_attr: {class: 'new-recipe__seasonality'}}) }}
+      {{ form_row(form.ingredients, {attr: {autocapitalize: 'off'}}) }}
+      {{ form_row(form.instructions) }}
+      {% if not fragment %}
+        <button class="button state new-recipe__button">Ajouter</button>
+      {% endif %}
+    </div>
+  {{ form_end(form) }}
+{% endblock %}

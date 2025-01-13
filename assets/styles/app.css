@@ -159,4 +159,8 @@ article {
   .new-recipe__seasonality {
     grid-column: span 1;
   }
+
+  .new-recipe__button {
+    grid-column: span 2;
+  }
 }

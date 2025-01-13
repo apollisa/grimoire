@@ -7,6 +7,7 @@ use App\Application\RecipeAdder;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\HttpKernel\Attribute\MapQueryParameter;
@@ -19,14 +20,16 @@ use Twig\Error\SyntaxError;
 
 #[AsController]
 #[Route("/recettes/nouvelle", "recipe_add", methods: ["GET", "POST"])]
-class AddRecipeAction
+class AddRecipeAction extends FragmentAction
 {
     public function __construct(
         private readonly FormFactoryInterface $factory,
         private readonly UrlGeneratorInterface $generator,
         private readonly RecipeAdder $adder,
-        private readonly Environment $twig,
+        RequestStack $stack,
+        Environment $twig,
     ) {
+        parent::__construct($stack, $twig);
     }
 
     /**
@@ -48,9 +51,8 @@ class AddRecipeAction
             $url = $this->generator->generate("recipe_display", ["id" => $id]);
             return new RedirectResponse($url, Response::HTTP_SEE_OTHER);
         } else {
-            $params = ["form" => $form->createView()];
-            $content = $this->twig->render("recipes/_new.html.twig", $params);
-            return new Response($content);
+            $parameters = ["form" => $form->createView()];
+            return $this->render("recipes/new.html.twig", $parameters);
         }
     }
 

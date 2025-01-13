@@ -4,7 +4,8 @@ html {
 }
 
 body {
-  background-color: var(--colour-surface);
+  --background: var(--colour-surface);
+  background-color: var(--background);
   color: var(--colour-on-surface);
   margin: 0;
 }

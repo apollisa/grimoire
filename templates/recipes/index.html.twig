@@ -14,9 +14,9 @@
     data-controller="new-recipe"
     data-new-recipe-url-value="{% block url %}{{ path('recipe_add') }}{% endblock %}"
   >
-    <button aria-label="Ajouter une recette" class="button button--fab state" data-action="new-recipe#open">
+    <a aria-label="Ajouter une recette" class="button button--fab state" data-action="new-recipe#open:prevent" href="{{ block('url') }}">
       {{ ux_icon('tabler:plus') }}
-    </button>
+    </a>
     <dialog class="full-screen" data-new-recipe-target="dialog"></dialog>
   </div>
 {% endblock %}

@@ -13,7 +13,7 @@ class AddRecipeActionTest extends WebTestCase
 
     protected function setUp(): void
     {
-        $this->client = self::createClient();
+        $this->client = self::createClient([], ["HTTP_X_STIMULUS" => "true"]);
         $this->client->request("GET", "/recettes/nouvelle");
     }
 

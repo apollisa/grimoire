@@ -1,8 +1,14 @@
 .button {
-  background: none;
+  --height: 40px;
+  background-color: var(--colour-primary);
   border: 0;
+  border-radius: calc(var(--height) / 2);
   box-sizing: border-box;
+  color: var(--colour-on-primary);
+  display: block;
   font: var(--label-large);
+  height: var(--height);
+  padding: 0 12px;
 
   & > * {
     position: relative;
@@ -45,10 +51,11 @@
 }
 
 .button--icon {
+  --height: 48px;
+  background-color: transparent;
   color: var(--colour-on-surface-variant);
-  height: 48px;
   padding: 12px;
-  width: 48px;
+  width: var(--height);
 
   &:disabled {
     color: var(--colour-on-surface);
@@ -64,11 +71,8 @@
 }
 
 .button--text {
-  --height: 40px;
-  border-radius: calc(var(--height) / 2);
+  background-color: transparent;
   color: var(--colour-primary);
-  height: var(--height);
-  padding: 0 12px;
 }
 
 @keyframes fab {
