@@ -10,13 +10,11 @@
         </h2>
         <div class="day__actions">
           {% set dayOfWeek = day.dayOfWeek.value %}
-          <div
-            data-controller="new-meal"
-            data-new-meal-url-value="{{ path('menu_recipes', {id: menu.id, jour: dayOfWeek}) }}"
-          >
-            <button aria-label="Ajouter un repas" class="button button--icon state" data-action="new-meal#open">
+          {% set url = path('menu_recipes', {id: menu.id, jour: dayOfWeek}) %}
+          <div data-controller="new-meal" data-new-meal-url-value="{{ url }}">
+            <a aria-label="Ajouter un repas" class="button button--icon state" data-action="new-meal#open:prevent" href="{{ url }}">
               {{ ux_icon('tabler:circle-plus') }}
-            </button>
+            </a>
             <dialog data-new-meal-target="dialog"></dialog>
           </div>
           <form action="{{ path('day_clear', {id: menu.id, day: dayOfWeek}) }}" method="post">

@@ -48,6 +48,10 @@ article {
   color: var(--colour-on-surface-variant);
 }
 
+.new-meal__button {
+  width: 100%;
+}
+
 .list__item {
   font: var(--body-large);
   --list-x-padding: 16px;
