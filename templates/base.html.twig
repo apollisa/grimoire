@@ -11,6 +11,7 @@
   <link rel="apple-touch-icon" href="{{ asset('images/apple-touch-icon.png') }}">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   {{ importmap('app', {nonce: csp.nonce}) }}
+  <noscript><style nonce="{{ csp.nonce }}">.needs-js { display: none; }</style></noscript>
 </head>
 <body>
 {% block header %}

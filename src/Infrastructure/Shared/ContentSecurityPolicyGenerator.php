@@ -31,6 +31,7 @@ class ContentSecurityPolicyGenerator
                 $directives = self::DIRECTIVES;
                 if ($this->nonce !== null) {
                     $directives[] = "script-src 'strict-dynamic' 'nonce-$this->nonce'";
+                    $directives[] = "style-src 'self' 'nonce-$this->nonce'";
                 }
                 $response->headers->set(
                     "Content-Security-Policy",
