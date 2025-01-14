@@ -5,8 +5,8 @@ namespace App\Domain\Recipe;
 use App\Domain\Shared\TimeTrackedEntity;
 use App\Infrastructure\Recipe\FolderIdType;
 use App\Infrastructure\Recipe\IngredientsType;
+use App\Infrastructure\Recipe\InstructionsType;
 use App\Infrastructure\Recipe\RecipeIdType;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Embedded;
 use Doctrine\ORM\Mapping\Entity;
@@ -34,7 +34,7 @@ class Recipe extends TimeTrackedEntity
     #[Column(type: IngredientsType::NAME)]
     private array $ingredients;
 
-    #[Column(type: Types::JSON)]
+    #[Column(type: InstructionsType::NAME)]
     private readonly array $instructions;
 
     /**

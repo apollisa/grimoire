@@ -6,6 +6,7 @@ doctrine:
     types:
       folder_id: App\Infrastructure\Recipe\FolderIdType
       ingredients: App\Infrastructure\Recipe\IngredientsType
+      instructions: App\Infrastructure\Recipe\InstructionsType
       meal_id: App\Infrastructure\Menu\MealIdType
       menu_id: App\Infrastructure\Menu\MenuIdType
       recipe_id: App\Infrastructure\Recipe\RecipeIdType

@@ -6,9 +6,9 @@ use App\Domain\Recipe\Ingredient;
 use App\Domain\Shared\Quantity;
 use App\Domain\Shared\Unit;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Doctrine\DBAL\Types\Type;
+use Doctrine\DBAL\Types\JsonType;
 
-class IngredientsType extends Type
+class IngredientsType extends JsonType
 {
     public const NAME = "ingredients";
 
@@ -30,6 +30,7 @@ class IngredientsType extends Type
                         "name" => $name,
                     ];
             }, $value),
+            JSON_UNESCAPED_UNICODE,
         );
     }
 
@@ -52,12 +53,5 @@ class IngredientsType extends Type
                 return new Ingredient(null, $name);
             }
         }, json_decode($value, true));
-    }
-
-    public function getSQLDeclaration(
-        array $column,
-        AbstractPlatform $platform,
-    ): string {
-        return $platform->getJsonTypeDeclarationSQL($column);
     }
 }
