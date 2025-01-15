@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+{% block head %}
+  <link rel="manifest" href="{{ path('manifest') }}">
+  <link rel="apple-touch-icon" href="{{ asset('images/apple-touch-icon.png') }}">
+{% endblock %}
+{% block body %}
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+  <nav class="navbar">
+    <ul class="nav">
+      {% macro link(route, icon, name) %}
+        <li class="nav__item">
+          <a
+            class="nav__link {% if app.current_route starts with route|split('_')|first %}nav__link--current{% endif %}"
+            href="{{ path(route) }}"
+          >{{ ux_icon(icon) }} {{ name }}</a>
+        </li>
+      {% endmacro %}
+      {{ _self.link('menu_display', 'tabler:calendar-month', 'Menu') }}
+      {{ _self.link('recipe_list', 'tabler:template', 'Recettes') }}
+      {{ _self.link('groceries_list', 'tabler:shopping-cart', 'Courses') }}
+    </ul>
+  </nav>
+{% endblock %}

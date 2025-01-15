@@ -2,38 +2,26 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>{% block title %}{% endblock %} · Grimoire</title>
-  <link rel="manifest" href="{{ path('manifest') }}">
   <meta name="theme-color" content="oklch(95.02% 0.015 332.24)" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="oklch(24.21% 0.0127 314.57)" media="(prefers-color-scheme: dark)">
-  <link rel="icon" href="/favicon.ico" sizes="32x32">
-  <link rel="icon" href="{{ asset('images/icon.svg') }}" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="{{ asset('images/apple-touch-icon.png') }}">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   {{ importmap('app', {nonce: csp.nonce}) }}
-  <noscript><style nonce="{{ csp.nonce }}">.needs-js { display: none; }</style></noscript>
+  <noscript>
+    <style nonce="{{ csp.nonce }}">
+      .needs-js {
+        display: none;
+      }
+    </style>
+  </noscript>
+  <title>{% block title %}{% endblock %} · Grimoire</title>
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" href="{{ asset('images/icon.svg') }}" type="image/svg+xml">
+  {% block head %}{% endblock %}
 </head>
 <body>
 {% block header %}
   <h1>{{ block('title') }}</h1>
 {% endblock %}
-<main>
-  {% block content %}{% endblock %}
-</main>
-<nav class="navbar">
-  <ul class="nav">
-    {% macro link(route, icon, name) %}
-      <li class="nav__item">
-        <a
-          class="nav__link {% if app.current_route starts with route|split('_')|first %}nav__link--current{% endif %}"
-          href="{{ path(route) }}"
-        >{{ ux_icon(icon) }} {{ name }}</a>
-      </li>
-    {% endmacro %}
-    {{ _self.link('menu_display', 'tabler:calendar-month', 'Menu') }}
-    {{ _self.link('recipe_list', 'tabler:template', 'Recettes') }}
-    {{ _self.link('groceries_list', 'tabler:shopping-cart', 'Courses') }}
-  </ul>
-</nav>
+{% block body %}{% endblock %}
 </body>
 </html>

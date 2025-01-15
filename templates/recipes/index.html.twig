@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'layouts/app.html.twig' %}
 {% block title 'Toutes vos recettes' %}
 {% block header %}
   <header>
@@ -14,9 +14,12 @@
     data-controller="new-recipe"
     data-new-recipe-url-value="{% block url %}{{ path('recipe_add') }}{% endblock %}"
   >
-    <a aria-label="Ajouter une recette" class="button button--fab state" data-action="new-recipe#open:prevent" href="{{ block('url') }}">
-      {{ ux_icon('tabler:plus') }}
-    </a>
+    <a
+      aria-label="Ajouter une recette"
+      class="button button--fab state"
+      data-action="new-recipe#open:prevent"
+      href="{{ block('url') }}"
+    >{{ ux_icon('tabler:plus') }}</a>
     <dialog class="full-screen" data-new-recipe-target="dialog"></dialog>
   </div>
 {% endblock %}

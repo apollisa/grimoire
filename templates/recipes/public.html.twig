@@ -1,0 +1,3 @@
+{% extends 'layouts/public.html.twig' %}
+{% block title recipe.name %}
+{% block content include('recipes/_recipe.html.twig', {recipe, folder}, with_context=false) %}

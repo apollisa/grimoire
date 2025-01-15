@@ -11,6 +11,8 @@ use Twig\Error\SyntaxError;
 
 abstract class FragmentAction
 {
+    use StimulusRequestTrait;
+
     protected function __construct(
         private readonly RequestStack $stack,
         private readonly Environment $twig,
@@ -25,10 +27,10 @@ abstract class FragmentAction
     protected function render(string $template, array $parameters): Response
     {
         $request = $this->stack->getCurrentRequest();
-        $isFragment = $request->headers->get("X-Stimulus") === "true";
+        $isStimulusRequest = $this->isStimulusRequest($request);
         $wrapper = $this->twig->load($template);
-        $parameters["fragment"] = $isFragment;
-        $content = $isFragment
+        $parameters["fragment"] = $isStimulusRequest;
+        $content = $isStimulusRequest
             ? $wrapper->renderBlock("content", $parameters)
             : $wrapper->render($parameters);
         return new Response($content);

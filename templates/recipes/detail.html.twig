@@ -1,43 +1,9 @@
-{% extends 'base.html.twig' %}
+{% extends 'layouts/app.html.twig' %}
 {% block title recipe.name %}
 {% block content %}
-  <p class="recipe__detail">
-    {{ ux_icon('tabler:tools-kitchen-2') }}
-    {{ '{servings, plural, one {1 part} other {# parts}}'|trans({servings: recipe.servings.value}) }}
-  </p>
-  {% if recipe.seasonality %}
-    <p class="recipe__detail">
-      {{ ux_icon('tabler:sun') }}
-      {% set seasonality = recipe.seasonality %}
-      {% if seasonality.isYearRound %}
-        Toute l’année
-      {% else %}
-        {{ months[seasonality.starts.value]|capitalize }} à {{ months[seasonality.ends.value] }}
-      {% endif %}
-    </p>
-  {% endif %}
-  <p class="recipe__detail">{{ ux_icon('tabler:folder') }} {{ folder.name }}</p>
-  <h2 class="recipe__section">Ingrédients</h2>
-  <ul class="ingredients">
-    {% for ingredient in recipe.ingredients %}
-      <li>
-        {% set quantity = ingredient.quantity %}
-        {% if quantity %}
-          <span class="quantity">
-            {{ quantity.value|format_number }} {{ units[quantity.unit.value] ?? quantity.unit.value }}
-          </span> {{ ingredient.name }}
-        {% else %}
-          {{ ingredient.name|capitalize }}
-        {% endif %}
-      </li>
-    {% endfor %}
-  </ul>
-  {% if recipe.instructions %}
-    <h2 class="recipe__section">Instructions</h2>
-    <ol class="instructions">
-      {% for instruction in recipe.instructions %}
-        <li class="instructions__item">{{ instruction }}</li>
-      {% endfor %}
-    </ol>
-  {% endif %}
+  {{ include('recipes/_recipe.html.twig', {recipe, folder}, with_context=false) }}
+  {% set url = path('recipe_share', {id: recipe.id}) %}
+  <form action="{{ url }}" class="fab" data-action="recipe#share:prevent" data-controller="recipe" method="post">
+    <button aria-label="Partager" class="button button--fab state">{{ ux_icon('tabler:share-3') }}</button>
+  </form>
 {% endblock %}
