@@ -18,4 +18,9 @@ abstract class TimeTrackedEntity
     {
         $this->updatedAt = new DatePoint();
     }
+
+    public function updatedAt(): DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
 }

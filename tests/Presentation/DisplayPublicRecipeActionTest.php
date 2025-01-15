@@ -6,11 +6,11 @@ use App\Application\RecipeSharer;
 use App\Domain\Recipe\RecipeId;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\BrowserKit\AbstractBrowser;
+use Symfony\Component\HttpKernel\HttpKernelBrowser;
 
 class DisplayPublicRecipeActionTest extends WebTestCase
 {
-    private AbstractBrowser $client;
+    private HttpKernelBrowser $client;
 
     protected function setUp(): void
     {
@@ -29,5 +29,22 @@ class DisplayPublicRecipeActionTest extends WebTestCase
     public function testDoesNotDisplayNavbar(): void
     {
         self::assertSelectorNotExists("nav");
+    }
+
+    public function testSendsLastModified(): void
+    {
+        self::assertResponseHasHeader("Last-Modified");
+    }
+
+    public function testReturnsNotModified(): void
+    {
+        $modified = $this->client->getResponse()->headers->get("Last-Modified");
+        $this->client->request(
+            "GET",
+            "/public/recettes/parmentier",
+            server: ["HTTP_IF_MODIFIED_SINCE" => $modified],
+        );
+
+        self::assertResponseStatusCodeSame(304);
     }
 }
