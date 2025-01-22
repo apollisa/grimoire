@@ -16,8 +16,7 @@ readonly class Seasonality
     public function __construct(
         #[Column] private Month $starts,
         #[Column] private Month $ends,
-    ) {
-    }
+    ) {}
 
     public function isYearRound(): bool
     {

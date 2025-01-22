@@ -10,8 +10,7 @@ class MenuFactory
         private readonly ClockInterface $clock,
         private readonly MenuRepository $repository,
         private readonly MenuFiller $filler,
-    ) {
-    }
+    ) {}
 
     public function create(): Menu
     {

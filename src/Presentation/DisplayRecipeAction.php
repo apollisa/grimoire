@@ -16,8 +16,7 @@ class DisplayRecipeAction extends AbstractController
     public function __construct(
         private readonly RecipeRepository $recipeRepository,
         private readonly FolderRepository $folderRepository,
-    ) {
-    }
+    ) {}
 
     public function __invoke(int $id): Response
     {

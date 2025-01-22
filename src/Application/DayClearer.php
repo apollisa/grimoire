@@ -12,8 +12,7 @@ class DayClearer
     public function __construct(
         private readonly EntityManagerInterface $manager,
         private readonly MenuRepository $repository,
-    ) {
-    }
+    ) {}
 
     public function clear(MenuId $id, DayOfWeek $day): void
     {

@@ -12,8 +12,7 @@ class MenuGenerator
         private readonly EntityManagerInterface $manager,
         private readonly MenuFactory $factory,
         private readonly MenuRepository $repository,
-    ) {
-    }
+    ) {}
 
     public function generate(): void
     {

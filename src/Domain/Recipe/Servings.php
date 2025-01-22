@@ -16,8 +16,7 @@ readonly class Servings
 
     public function __construct(
         #[Column("servings", Types::SMALLINT)] private int $value,
-    ) {
-    }
+    ) {}
 
     public function value(): int
     {

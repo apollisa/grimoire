@@ -16,8 +16,7 @@ class RecipeSharer
         private readonly Connection $connection,
         private readonly RecipeRepository $repository,
         private readonly SluggerInterface $slugger,
-    ) {
-    }
+    ) {}
 
     /**
      * @throws Exception

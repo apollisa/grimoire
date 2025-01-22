@@ -16,8 +16,7 @@ class DetailFolderAction extends AbstractController
     public function __construct(
         private readonly FolderRepository $folderRepository,
         private readonly RecipeRepository $recipeRepository,
-    ) {
-    }
+    ) {}
 
     public function __invoke(int $id): Response
     {

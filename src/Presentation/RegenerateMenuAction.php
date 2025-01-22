@@ -11,9 +11,9 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route("/menu", "menu_regenerate", methods: Request::METHOD_POST)]
 class RegenerateMenuAction extends AbstractController
 {
-    public function __construct(private readonly MenuRegenerator $regenerator)
-    {
-    }
+    public function __construct(
+        private readonly MenuRegenerator $regenerator,
+    ) {}
 
     public function __invoke(): Response
     {

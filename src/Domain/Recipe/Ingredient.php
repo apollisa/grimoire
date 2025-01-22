@@ -9,8 +9,7 @@ readonly class Ingredient
     public function __construct(
         private ?Quantity $quantity,
         private string $name,
-    ) {
-    }
+    ) {}
 
     public function quantity(): ?Quantity
     {

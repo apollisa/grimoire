@@ -16,8 +16,7 @@ class MealAdder
         private readonly EntityManagerInterface $manager,
         private readonly MenuRepository $menuRepository,
         private readonly RecipeRepository $recipeRepository,
-    ) {
-    }
+    ) {}
 
     public function add(MenuId $id, DayOfWeek $day, RecipeId|MealId $meal): void
     {

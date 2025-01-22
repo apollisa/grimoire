@@ -23,9 +23,7 @@ class AddRecipeAction extends AbstractController
 
     private const TEMPLATE = "recipes/new.html.twig";
 
-    public function __construct(private readonly RecipeAdder $adder)
-    {
-    }
+    public function __construct(private readonly RecipeAdder $adder) {}
 
     public function __invoke(
         Request $request,

@@ -13,9 +13,7 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route("/menu/{id}/jour/{day}", "day_clear", methods: Request::METHOD_POST)]
 class ClearDayAction extends AbstractController
 {
-    public function __construct(private readonly DayClearer $clearer)
-    {
-    }
+    public function __construct(private readonly DayClearer $clearer) {}
 
     public function __invoke(int $id, DayOfWeek $day): Response
     {

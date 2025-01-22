@@ -15,8 +15,7 @@ class DisplayMenuAction extends AbstractController
     public function __construct(
         private readonly MenuRepository $menuRepository,
         private readonly RecipeRepository $recipeRepository,
-    ) {
-    }
+    ) {}
 
     public function __invoke(): Response
     {

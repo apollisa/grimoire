@@ -6,9 +6,7 @@ use Stringable;
 
 abstract readonly class Id implements Stringable
 {
-    final public function __construct(private int $value)
-    {
-    }
+    final public function __construct(private int $value) {}
 
     final public function value(): int
     {

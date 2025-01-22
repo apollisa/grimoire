@@ -13,9 +13,7 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route("{id}/jours/{day}/repas", "menu_plan", methods: Request::METHOD_POST)]
 class PlanMealAction extends AbstractController
 {
-    public function __construct(private readonly MealAdder $adder)
-    {
-    }
+    public function __construct(private readonly MealAdder $adder) {}
 
     public function __invoke(
         int $id,

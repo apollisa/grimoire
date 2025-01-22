@@ -12,8 +12,7 @@ class RecipePicker
     public function __construct(
         private readonly FolderRepository $folderRepository,
         private readonly RecipeRepository $recipeRepository,
-    ) {
-    }
+    ) {}
 
     /**
      * @return Recipe[]

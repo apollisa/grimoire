@@ -11,9 +11,7 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route("/courses", "groceries_list", methods: Request::METHOD_GET)]
 class ListGroceriesAction extends AbstractController
 {
-    public function __construct(private readonly MenuRepository $repository)
-    {
-    }
+    public function __construct(private readonly MenuRepository $repository) {}
 
     public function __invoke(): Response
     {

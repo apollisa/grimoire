@@ -12,8 +12,7 @@ readonly class Quantity
     public function __construct(
         #[Column(type: Types::SMALLFLOAT)] private float $value,
         #[Column] private Unit $unit = Unit::UNITS,
-    ) {
-    }
+    ) {}
 
     public function value(): float
     {

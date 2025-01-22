@@ -15,9 +15,7 @@ use Throwable;
 #[Route("/recettes/{id}", "recipe_share", methods: Request::METHOD_POST)]
 class ShareRecipeAction extends AbstractController
 {
-    public function __construct(private readonly RecipeSharer $sharer)
-    {
-    }
+    public function __construct(private readonly RecipeSharer $sharer) {}
 
     /**
      * @throws Exception

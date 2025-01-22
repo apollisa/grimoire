@@ -12,8 +12,7 @@ class MenuRegenerator
         private readonly EntityManagerInterface $manager,
         private readonly MenuRepository $repository,
         private readonly MenuFiller $filler,
-    ) {
-    }
+    ) {}
 
     public function regenerate(): void
     {

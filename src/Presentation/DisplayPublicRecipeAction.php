@@ -25,8 +25,7 @@ class DisplayPublicRecipeAction extends AbstractController
         private readonly Connection $connection,
         private readonly RecipeRepository $recipeRepository,
         private readonly FolderRepository $folderRepository,
-    ) {
-    }
+    ) {}
 
     /**
      * @throws Exception

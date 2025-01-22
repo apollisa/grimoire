@@ -18,8 +18,7 @@ class RecipeAdder
         private readonly FolderRepository $folderRepository,
         private readonly IngredientTransformer $transformer,
         private readonly RecipeRepository $recipeRepository,
-    ) {
-    }
+    ) {}
 
     public function add(AddRecipeCommand $command): Recipe
     {

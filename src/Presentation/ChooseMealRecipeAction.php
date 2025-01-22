@@ -24,8 +24,7 @@ class ChooseMealRecipeAction extends AbstractController
         private readonly MenuRepository $menuRepository,
         private readonly RecipeRepository $recipeRepository,
         private readonly RecipePicker $picker,
-    ) {
-    }
+    ) {}
 
     public function __invoke(
         int $id,
