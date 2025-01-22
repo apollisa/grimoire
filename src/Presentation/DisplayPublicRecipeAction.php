@@ -7,33 +7,29 @@ use App\Domain\Recipe\RecipeId;
 use App\Domain\Recipe\RecipeRepository;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Attribute\AsController;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Attribute\Route;
-use Twig\Environment;
-use Twig\Error\LoaderError;
-use Twig\Error\RuntimeError;
-use Twig\Error\SyntaxError;
 
-#[AsController]
-#[Route("/public/recettes/{slug}", "recipe_public", methods: "GET")]
-class DisplayPublicRecipeAction
+#[
+    Route(
+        "/public/recettes/{slug}",
+        "recipe_public",
+        methods: Request::METHOD_GET,
+    ),
+]
+class DisplayPublicRecipeAction extends AbstractController
 {
     public function __construct(
         private readonly Connection $connection,
         private readonly RecipeRepository $recipeRepository,
         private readonly FolderRepository $folderRepository,
-        private readonly Environment $twig,
     ) {
     }
 
     /**
      * @throws Exception
-     * @throws LoaderError
-     * @throws SyntaxError
-     * @throws RuntimeError
      */
     public function __invoke(string $slug, Request $request): Response
     {
@@ -43,11 +39,11 @@ class DisplayPublicRecipeAction
         $response->setLastModified($recipe->updatedAt());
         if (!$response->isNotModified($request)) {
             $folder = $this->folderRepository->ofId($recipe->folder());
-            $content = $this->twig->render("recipes/public.html.twig", [
-                "recipe" => $recipe,
-                "folder" => $folder,
-            ]);
-            $response->setContent($content);
+            $this->render(
+                "recipes/public.html.twig",
+                ["recipe" => $recipe, "folder" => $folder],
+                $response,
+            );
         }
         return $response;
     }
@@ -61,7 +57,7 @@ class DisplayPublicRecipeAction
             ->executeQuery("SELECT id FROM recipe WHERE slug = ?", [$slug])
             ->fetchOne();
         if ($id === false) {
-            throw new NotFoundHttpException("Recette inconnue");
+            throw $this->createNotFoundException("Recette inconnue");
         }
         return new RecipeId($id);
     }

@@ -3,20 +3,22 @@
 namespace App\Presentation;
 
 use App\Domain\Recipe\RecipeRepository;
-use Symfony\Bridge\Twig\Attribute\Template;
-use Symfony\Component\HttpKernel\Attribute\AsController;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[AsController, Route("/recettes", "recipe_list", methods: "GET")]
-class ListRecipesAction
+#[Route("/recettes", "recipe_list", methods: Request::METHOD_GET)]
+class ListRecipesAction extends AbstractController
 {
     public function __construct(private readonly RecipeRepository $repository)
     {
     }
 
-    #[Template("recipes/index.html.twig")]
-    public function __invoke(): array
+    public function __invoke(): Response
     {
-        return ["recipes" => $this->repository->all()];
+        return $this->render("recipes/index.html.twig", [
+            "recipes" => $this->repository->all(),
+        ]);
     }
 }

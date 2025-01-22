@@ -4,55 +4,54 @@ namespace App\Presentation;
 
 use App\Application\AddRecipeCommand;
 use App\Application\RecipeAdder;
-use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\HttpKernel\Attribute\MapQueryParameter;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Twig\Environment;
-use Twig\Error\LoaderError;
-use Twig\Error\RuntimeError;
-use Twig\Error\SyntaxError;
 
-#[AsController]
-#[Route("/recettes/nouvelle", "recipe_add", methods: ["GET", "POST"])]
-class AddRecipeAction extends FragmentAction
+#[
+    Route(
+        "/recettes/nouvelle",
+        "recipe_add",
+        methods: [Request::METHOD_GET, Request::METHOD_POST],
+    ),
+]
+class AddRecipeAction extends AbstractController
 {
-    public function __construct(
-        private readonly FormFactoryInterface $factory,
-        private readonly UrlGeneratorInterface $generator,
-        private readonly RecipeAdder $adder,
-        RequestStack $stack,
-        Environment $twig,
-    ) {
-        parent::__construct($stack, $twig);
+    use StimulusRequestTrait;
+
+    private const TEMPLATE = "recipes/new.html.twig";
+
+    public function __construct(private readonly RecipeAdder $adder)
+    {
     }
 
-    /**
-     * @throws RuntimeError
-     * @throws SyntaxError
-     * @throws LoaderError
-     */
     public function __invoke(
         Request $request,
         #[MapQueryParameter("dossier")] ?int $folder = null,
     ): Response {
         $command = $this->getCommand($folder);
-        $form = $this->factory->create(RecipeType::class, $command, [
-            "action" => $this->generator->generate("recipe_add"),
+        $form = $this->createForm(RecipeType::class, $command, [
+            "action" => $this->generateUrl("recipe_add"),
         ]);
         $form->handleRequest($request);
         if ($form->isSubmitted()) {
             $id = $this->adder->add($command)->id()->value();
-            $url = $this->generator->generate("recipe_display", ["id" => $id]);
-            return new RedirectResponse($url, Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute(
+                "recipe_display",
+                ["id" => $id],
+                Response::HTTP_SEE_OTHER,
+            );
         } else {
-            $parameters = ["form" => $form->createView()];
-            return $this->render("recipes/new.html.twig", $parameters);
+            $isStimulusRequest = $this->isStimulusRequest($request);
+            $parameters = [
+                "fragment" => $isStimulusRequest,
+                "form" => $form->createView(),
+            ];
+            return $isStimulusRequest
+                ? $this->renderBlock(self::TEMPLATE, "content", $parameters)
+                : $this->render(self::TEMPLATE, $parameters);
         }
     }
 

@@ -4,12 +4,13 @@ namespace App\Presentation;
 
 use App\Domain\Menu\MenuRepository;
 use App\Domain\Recipe\RecipeRepository;
-use Symfony\Bridge\Twig\Attribute\Template;
-use Symfony\Component\HttpKernel\Attribute\AsController;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[AsController, Route(name: "menu_display", methods: "GET")]
-class DisplayMenuAction
+#[Route(name: "menu_display", methods: Request::METHOD_GET)]
+class DisplayMenuAction extends AbstractController
 {
     public function __construct(
         private readonly MenuRepository $menuRepository,
@@ -17,8 +18,7 @@ class DisplayMenuAction
     ) {
     }
 
-    #[Template("menus/index.html.twig")]
-    public function __invoke(): array
+    public function __invoke(): Response
     {
         $menus = $this->menuRepository->upcoming();
         $recipes = [];
@@ -30,6 +30,9 @@ class DisplayMenuAction
                 }
             }
         }
-        return ["menus" => $menus, "recipes" => $recipes];
+        return $this->render("menus/index.html.twig", [
+            "menus" => $menus,
+            "recipes" => $recipes,
+        ]);
     }
 }

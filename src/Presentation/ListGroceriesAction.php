@@ -3,20 +3,22 @@
 namespace App\Presentation;
 
 use App\Domain\Menu\MenuRepository;
-use Symfony\Bridge\Twig\Attribute\Template;
-use Symfony\Component\HttpKernel\Attribute\AsController;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[AsController, Route("/courses", "groceries_list", methods: "GET")]
-class ListGroceriesAction
+#[Route("/courses", "groceries_list", methods: Request::METHOD_GET)]
+class ListGroceriesAction extends AbstractController
 {
     public function __construct(private readonly MenuRepository $repository)
     {
     }
 
-    #[Template("groceries/index.html.twig")]
-    public function __invoke(): array
+    public function __invoke(): Response
     {
-        return ["groceries" => $this->repository->last()->groceries()];
+        return $this->render("groceries/index.html.twig", [
+            "groceries" => $this->repository->last()->groceries(),
+        ]);
     }
 }

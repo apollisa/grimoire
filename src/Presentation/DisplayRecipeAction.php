@@ -5,12 +5,13 @@ namespace App\Presentation;
 use App\Domain\Recipe\FolderRepository;
 use App\Domain\Recipe\RecipeId;
 use App\Domain\Recipe\RecipeRepository;
-use Symfony\Bridge\Twig\Attribute\Template;
-use Symfony\Component\HttpKernel\Attribute\AsController;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[AsController, Route("/recettes/{id}", "recipe_display", methods: "GET")]
-class DisplayRecipeAction
+#[Route("/recettes/{id}", "recipe_display", methods: Request::METHOD_GET)]
+class DisplayRecipeAction extends AbstractController
 {
     public function __construct(
         private readonly RecipeRepository $recipeRepository,
@@ -18,13 +19,12 @@ class DisplayRecipeAction
     ) {
     }
 
-    #[Template("recipes/detail.html.twig")]
-    public function __invoke(int $id): array
+    public function __invoke(int $id): Response
     {
         $recipe = $this->recipeRepository->ofId(new RecipeId($id));
-        return [
+        return $this->render("recipes/detail.html.twig", [
             "recipe" => $recipe,
             "folder" => $this->folderRepository->ofId($recipe->folder()),
-        ];
+        ]);
     }
 }

@@ -3,20 +3,22 @@
 namespace App\Presentation;
 
 use App\Domain\Recipe\FolderRepository;
-use Symfony\Bridge\Twig\Attribute\Template;
-use Symfony\Component\HttpKernel\Attribute\AsController;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[AsController, Route("/dossiers", "folder_list", methods: "GET")]
-class ListFoldersAction
+#[Route("/dossiers", "folder_list", methods: Request::METHOD_GET)]
+class ListFoldersAction extends AbstractController
 {
     public function __construct(private readonly FolderRepository $repository)
     {
     }
 
-    #[Template("folders/index.html.twig")]
-    public function __invoke(): array
+    public function __invoke(): Response
     {
-        return ["folders" => $this->repository->all()];
+        return $this->render("folders/index.html.twig", [
+            "folders" => $this->repository->all(),
+        ]);
     }
 }
