@@ -23,8 +23,10 @@ class RecipeAdder
     public function add(AddRecipeCommand $command): Recipe
     {
         return $this->manager->wrapInTransaction(function () use ($command) {
-            $recipe = new Recipe(
-                $this->folderRepository->ofId(new FolderId($command->folder)),
+            $folder = $this->folderRepository->ofId(
+                new FolderId($command->folder),
+            );
+            $recipe = $folder->add(
                 $command->name,
                 new Servings($command->servings),
                 $this->getSeasonality($command),

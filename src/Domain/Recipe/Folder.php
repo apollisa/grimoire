@@ -41,4 +41,25 @@ class Folder
     {
         return $this->isIncludedInMenus;
     }
+
+    /**
+     * @param Ingredient[] $ingredients
+     * @param string[] $instructions
+     */
+    public function add(
+        string $name,
+        Servings $param,
+        ?Seasonality $seasonality,
+        array $ingredients,
+        array $instructions,
+    ): Recipe {
+        return new Recipe(
+            $this,
+            $name,
+            $param,
+            $seasonality,
+            $ingredients,
+            $instructions,
+        );
+    }
 }
